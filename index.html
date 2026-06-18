@@ -35,21 +35,21 @@ let DB={},currentView="map",selectedId=null,currentRole="admin";
 const PROP_DEFS=[{id:"4896",lbl:"4896"},{id:"4888",lbl:"4888"},{id:"4880",lbl:"4880"},{id:"4872a",lbl:"4872"},{id:"4864",lbl:"4864"},{id:"4856",lbl:"4856"},{id:"4848",lbl:"4848"},{id:"4840a",lbl:"4840"},{id:"4832",lbl:"4832"},{id:"4824",lbl:"4824"},{id:"4816",lbl:"4816"},{id:"4808",lbl:"4808"},{id:"4800",lbl:"4800"},{id:"4857",lbl:"4857"},{id:"4849",lbl:"4849"},{id:"4841",lbl:"4841"},{id:"4833a",lbl:"4833"},{id:"4825",lbl:"4825"},{id:"4817",lbl:"4817"},{id:"4809",lbl:"4809"},{id:"4850",lbl:"4850"},{id:"4842",lbl:"4842"},{id:"4834a",lbl:"4834"},{id:"4826",lbl:"4826"},{id:"4818",lbl:"4818"},{id:"4810",lbl:"4810"},{id:"4802",lbl:"4802"},{id:"th11637",lbl:"11637"},{id:"th11631",lbl:"11631"},{id:"th11625",lbl:"11625"},{id:"th11619",lbl:"11619"},{id:"th11613",lbl:"11613"},{id:"th11607",lbl:"11607"},{id:"4895",lbl:"4895"},{id:"4887",lbl:"4887"},{id:"4879",lbl:"4879"},{id:"4871a",lbl:"4871"},{id:"4863",lbl:"4863"},{id:"4855",lbl:"4855"},{id:"4847",lbl:"4847"},{id:"4839",lbl:"4839"},{id:"th11572",lbl:"11572"},{id:"th11566",lbl:"11566"},{id:"th11565",lbl:"11565"},{id:"th11548",lbl:"11548"},{id:"th11542",lbl:"11542"},{id:"th11536",lbl:"11536"},{id:"th11530",lbl:"11530"},{id:"th11524",lbl:"11524"},{id:"th11518",lbl:"11518"},{id:"th11512",lbl:"11512"},{id:"th11506",lbl:"11506"},{id:"th11500",lbl:"11500"},{id:"th11494",lbl:"11494"},{id:"th11498",lbl:"11498"},{id:"th11492",lbl:"11492"},{id:"th11486",lbl:"11486"},{id:"th11480",lbl:"11480"},{id:"th11474",lbl:"11474"},{id:"th11468",lbl:"11468"},{id:"th11462",lbl:"11462"},{id:"th11456",lbl:"11456"},{id:"th11450",lbl:"11450"},{id:"th11444",lbl:"11444"},{id:"th11438",lbl:"11438"},{id:"th11432",lbl:"11432"},{id:"th11426",lbl:"11426"},{id:"4840b",lbl:"4840"},{id:"4834b",lbl:"4834"},{id:"4833b",lbl:"4833"},{id:"4828",lbl:"4828"},{id:"4827",lbl:"4827"},{id:"4822",lbl:"4822"},{id:"4821",lbl:"4821"},{id:"4814",lbl:"4814"},{id:"4813",lbl:"4813"},{id:"4806",lbl:"4806"},{id:"4805",lbl:"4805"},{id:"4878",lbl:"4878"},{id:"4877",lbl:"4877"},{id:"4872b",lbl:"4872"},{id:"4871b",lbl:"4871"},{id:"4866",lbl:"4866"},{id:"4865",lbl:"4865"},{id:"4860",lbl:"4860"},{id:"4859",lbl:"4859"},{id:"4854",lbl:"4854"}];
 function empty(id,lbl){return{id,unit:lbl,address:"",homeowner1:"",homeowner2:"",tenant1_name:"",tenant1_phone:"",tenant1_email:"",tenant2_name:"",tenant2_phone:"",tenant2_email:"",occ1_name:"",occ1_phone:"",occ1_email:"",occ2_name:"",occ2_phone:"",occ2_email:"",kf1:"",kf2:"",kf3:"",kf4:"",kf5:"",kf6:"",kf7:"",kf8:"",pet1_name:"",pet1_breed:"",pet1_gender:"",pet2_name:"",pet2_breed:"",pet2_gender:"",notes:""};} function hasData(p){return p&&!!(p.homeowner1||p.homeowner2||p.tenant1_name||p.kf1||p.pet1_name);}
 function doLogin(){
-  const u=document.getElementById("lu").value.trim().toLowerCase();
-  const p=document.getElementById("lp").value.trim();
-  const f=USERS.find(x=>x.u===u&&x.p===p);
-  if(!f){
-    const errEl=document.getElementById("login-err");
-    errEl.textContent="Usuario o contrase\xF1a incorrectos (u="+u+" p="+p.length+"chars)";
-    errEl.style.display="block";
+  var uEl=document.getElementById('lu');
+  var pEl=document.getElementById('lp');
+  var u=uEl.value.replace(/[\s]/g,'').toLowerCase();
+  var p=pEl.value.replace(/[\s]/g,'');
+  var ok=(u==='admin'&&p==='doral2024')||(u==='viewer'&&p==='view2024');
+  if(!ok){
+    document.getElementById('login-err').style.display='block';
     return;
   }
-  document.getElementById("login-err").style.display="none";
-  currentRole=f.role;
-  sessionStorage.setItem("hoa",JSON.stringify(f));
-  document.getElementById("login-page").style.display="none";
-  document.getElementById("app").style.display="flex";
-  document.getElementById("role-tag").textContent=f.role;
+  document.getElementById('login-err').style.display='none';
+  currentRole=(u==='admin')?'admin':'viewer';
+  sessionStorage.setItem('hoa',JSON.stringify({u:u,role:currentRole}));
+  document.getElementById('login-page').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.getElementById('role-tag').textContent=currentRole;
   loadData();
 }else{document.getElementById("login-err").style.display="block";document.getElementById("login-err").textContent="Usuario o contraseña incorrectos";}}
 document.getElementById("lp").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin();});document.getElementById("lu").addEventListener("keydown",function(e){if(e.key==="Enter")document.getElementById("lp").focus();});
