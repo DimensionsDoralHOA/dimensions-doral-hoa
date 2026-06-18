@@ -148,32 +148,48 @@ const USERS=[{u:'admin',p:'doral2024',role:'admin'},{u:'viewer',p:'view2024',rol
 let DB={}, currentView='map', selectedId=null, currentRole='admin';
 
 const PROP_DEFS=[
+  // Left column top
   {id:'4896',lbl:'4896'},{id:'4888',lbl:'4888'},{id:'4880',lbl:'4880'},
   {id:'4872a',lbl:'4872'},{id:'4864',lbl:'4864'},{id:'4856',lbl:'4856'},
+  // Left column bottom
   {id:'4848',lbl:'4848'},{id:'4840a',lbl:'4840'},{id:'4832',lbl:'4832'},
   {id:'4824',lbl:'4824'},{id:'4816',lbl:'4816'},{id:'4808',lbl:'4808'},{id:'4800',lbl:'4800'},
+  // Top townhouses (NW 48TH LN area) - 7 units
+  {id:'th11637',lbl:'11637'},{id:'th11631',lbl:'11631'},{id:'th11625',lbl:'11625'},
+  {id:'th11619',lbl:'11619'},{id:'th11613',lbl:'11613'},{id:'th11607',lbl:'11607'},{id:'th11601',lbl:'11601'},
+  // Inner block left col
   {id:'4857',lbl:'4857'},{id:'4849',lbl:'4849'},{id:'4841',lbl:'4841'},
   {id:'4833a',lbl:'4833'},{id:'4825',lbl:'4825'},{id:'4817',lbl:'4817'},{id:'4809',lbl:'4809'},
+  // Inner block right col
   {id:'4850',lbl:'4850'},{id:'4842',lbl:'4842'},{id:'4834a',lbl:'4834'},
   {id:'4826',lbl:'4826'},{id:'4818',lbl:'4818'},{id:'4810',lbl:'4810'},{id:'4802',lbl:'4802'},
-  {id:'th11637',lbl:'11637'},{id:'th11631',lbl:'11631'},{id:'th11625',lbl:'11625'},
-  {id:'th11619',lbl:'11619'},{id:'th11613',lbl:'11613'},{id:'th11607',lbl:'11607'},
+  // Center column
   {id:'4895',lbl:'4895'},{id:'4887',lbl:'4887'},{id:'4879',lbl:'4879'},
   {id:'4871a',lbl:'4871'},{id:'4863',lbl:'4863'},{id:'4855',lbl:'4855'},
   {id:'4847',lbl:'4847'},{id:'4839',lbl:'4839'},
+  // Right top left col
+  {id:'4878',lbl:'4878'},{id:'4872b',lbl:'4872'},{id:'4866',lbl:'4866'},
+  {id:'4860',lbl:'4860'},{id:'4854',lbl:'4854'},
+  // Right top right col
+  {id:'4877',lbl:'4877'},{id:'4871b',lbl:'4871'},{id:'4865',lbl:'4865'},{id:'4859',lbl:'4859'},
+  // Right bottom left col
+  {id:'4840b',lbl:'4840'},{id:'4834b',lbl:'4834'},{id:'4828',lbl:'4828'},
+  {id:'4822',lbl:'4822'},{id:'4814',lbl:'4814'},{id:'4806',lbl:'4806'},
+  // Right bottom right col
+  {id:'4833b',lbl:'4833'},{id:'4827',lbl:'4827'},{id:'4821',lbl:'4821'},
+  {id:'4813',lbl:'4813'},{id:'4805',lbl:'4805'},
+  // Bottom townhouses group 1 (7)
   {id:'th11572',lbl:'11572'},{id:'th11566',lbl:'11566'},{id:'th11565',lbl:'11565'},
-  {id:'th11548',lbl:'11548'},{id:'th11542',lbl:'11542'},{id:'th11536',lbl:'11536'},
-  {id:'th11530',lbl:'11530'},{id:'th11524',lbl:'11524'},{id:'th11518',lbl:'11518'},
-  {id:'th11512',lbl:'11512'},{id:'th11506',lbl:'11506'},{id:'th11500',lbl:'11500'},
-  {id:'4840b',lbl:'4840'},{id:'4834b',lbl:'4834'},{id:'4833b',lbl:'4833'},
-  {id:'4828',lbl:'4828'},{id:'4827',lbl:'4827'},{id:'4822',lbl:'4822'},{id:'4821',lbl:'4821'},
-  {id:'4814',lbl:'4814'},{id:'4813',lbl:'4813'},{id:'4806',lbl:'4806'},{id:'4805',lbl:'4805'},
-  {id:'4878',lbl:'4878'},{id:'4877',lbl:'4877'},{id:'4872b',lbl:'4872'},{id:'4871b',lbl:'4871'},
-  {id:'4866',lbl:'4866'},{id:'4865',lbl:'4865'},{id:'4860',lbl:'4860'},{id:'4859',lbl:'4859'},
-  {id:'4854',lbl:'4854'},
-  {id:'th11474',lbl:'11474'},{id:'th11468',lbl:'11468'},{id:'th11462',lbl:'11462'},
-  {id:'th11456',lbl:'11456'},{id:'th11450',lbl:'11450'},{id:'th11444',lbl:'11444'},
-  {id:'th11438',lbl:'11438'},{id:'th11432',lbl:'11432'},{id:'th11426',lbl:'11426'},
+  {id:'th11548',lbl:'11548'},{id:'th11542',lbl:'11542'},{id:'th11536',lbl:'11536'},{id:'th11530',lbl:'11530'},
+  // Bottom townhouses group 2 (6)
+  {id:'th11524',lbl:'11524'},{id:'th11518',lbl:'11518'},{id:'th11512',lbl:'11512'},
+  {id:'th11506',lbl:'11506'},{id:'th11500',lbl:'11500'},{id:'th11494',lbl:'11494'},
+  // Bottom townhouses group 3 (6)
+  {id:'th11498',lbl:'11498'},{id:'th11492',lbl:'11492'},{id:'th11486',lbl:'11486'},
+  {id:'th11480',lbl:'11480'},{id:'th11474',lbl:'11474'},{id:'th11468',lbl:'11468'},
+  // Bottom townhouses group 4 (7)
+  {id:'th11462',lbl:'11462'},{id:'th11456',lbl:'11456'},{id:'th11450',lbl:'11450'},
+  {id:'th11444',lbl:'11444'},{id:'th11438',lbl:'11438'},{id:'th11432',lbl:'11432'},{id:'th11426',lbl:'11426'},
 ];
 
 function empty(id,lbl){
@@ -240,66 +256,53 @@ function renderSidebar(){
 }
 
 function renderMap(){
-  // Unit dimensions - same for ALL cells
-  var UW=68, UH=34, G=3;    // unit width/height/gap
-  var SVW=26, SVH=26;        // street width (vert/horiz)
+  // EXACT match to Excel reference image
+  // Unit size: 68x34 (same for all regular units)
+  // Street: orange, same proportions as Excel
+  var UW=68,UH=34,G=3,SVW=26,SVH=26;
 
-  // Townhouse cells: same height as unit (34) but NARROW (28px) and TALL (2*UH+G=71px)
-  // In Excel: top TH are 2 rows tall, narrow width, rotated text
-  var TW=32, TH2=UH*2+G;    // TH width=32, height=71 (spans 2 unit rows)
+  // Top TH: narrow (32px wide), tall (71px = 2*UH+G), vertical text
+  // In Excel they sit in the orange NW116CT area above the inner block
+  var TW=32, TH2=UH*2+G;  // 71px tall
 
-  // Bottom TH: same height as top TH, narrow
-  var BTW=22, BTH=TH2;       // bottom TH width=22 (fit 26 units in space)
+  // X positions - matching Excel proportions exactly
+  var xLC=10;                    // Left Col
+  var xS1=xLC+UW+G;             // NW 116TH CT vertical street
+  var xIL=xS1+SVW+G;            // Inner block Left col
+  var xIR=xIL+UW+G;             // Inner block Right col  
+  var xS2=xIR+UW+G;             // NW 116TH AVE vertical street
+  var xCC=xS2+SVW+G;            // Center col
+  var xLK=xCC+UW+G;             // Lake start
+  var xS3=xLK+492;              // NW 114TH CT vertical street
+  var xRL=xS3+SVW+G;            // Right Left col
+  var xRR=xRL+UW+G;             // Right Right col
+  var xS4=xRR+UW+G;             // 114TH AVE vertical street
+  var W=xS4+SVW+10;             // Total width
 
-  // X positions (left to right)
-  var xLC  = 10;                     // Left Col
-  var xS1  = xLC+UW+G;              // NW 116TH CT street
-  var xIL  = xS1+SVW+G;             // Inner block Left col
-  var xIR  = xIL+UW+G;              // Inner block Right col
-  var xS2  = xIR+UW+G;              // NW 116TH AVE street
-  var xCC  = xS2+SVW+G;             // Center Col
-  var xLK  = xCC+UW+G;              // Lake start
-  var xS3  = xLK+492;               // NW 114TH CT street
-  var xRL  = xS3+SVW+G;             // Right Left col
-  var xRR  = xRL+UW+G;              // Right Right col
-  var xS4  = xRR+UW+G;              // 114TH AVE street
-  var W    = xS4+SVW+10;            // Total width
+  // Y positions
+  var yTH=10;                    // Top TH start (same top as left col top 6)
+  var yS48LN=yTH+TH2+G;        // NW 48TH LN street (BELOW top TH)
+  var yU=yS48LN+SVH+G;         // Main units start (left col, inner, center, right top)
+  var yLbot=yU+6*(UH+G)+12;    // Left col bottom group (visual gap after top 6)
+  var yS48TR=yU+8*(UH+G);      // NW 48TH TERR
+  var yRB=yS48TR+SVH+G;        // Right bottom & bottom TH start
+  var H=Math.max(yLbot+7*(UH+G), yRB+6*(UH+G), yRB+TH2)+24;
 
-  // Y positions (top to bottom)
-  // Top TH row is TH2=71px tall, starts at y=10
-  var yTH  = 10;                     // Top townhouses row
-  var yS48LN = yTH+TH2+G;           // NW 48TH LN street (BELOW top TH)
-  var yU   = yS48LN+SVH+G;          // Main units start
-  // Left col has 6 top units, gap (where 116CT label is), then 7 bottom units
-  // Gap = visual only, in Y the top 6 units go from yU to yU+6*(UH+G)
-  var yLgap = yU+6*(UH+G)+12;       // Left col bottom group start
-  // Inner block and center col: 7 rows starting at yU (no gap)
-  // NW 48TH TERR: center col has 8 units, so after 8 units
-  var yS48TR = yU+8*(UH+G);         // NW 48TH TERR street
-  // Right top: starts at yU, 5 units in L, 4 in R
-  // Right bottom: starts just below NW48TERR
-  var yRB  = yS48TR+SVH+G;          // Right bottom start
-  // Bottom TH row: same Y as yRB (aligns with right bottom in Excel)
-  var yBTH = yRB;                    // Bottom TH same row as right bottom units
-  // Total height: enough for left col bottom 7 + legend
-  var H = Math.max(yLgap+7*(UH+G), yRB+6*(UH+G), yBTH+BTH) + 24;
-
-  var lakeH = yS48TR - yU - G;      // Lake height
+  var lakeH=yS48TR-yU-G;
 
   function box(id,x,y,w,h,vert){
-    var p=DB[id]||{}, sel=selectedId===id;
+    var p=DB[id]||{},sel=selectedId===id;
     var fill=sel?"#90cdf4":(hasData(p)?"#c8f0d4":"#fff");
-    var stk=sel?"#2b6cb0":"#888", sw=sel?2:1;
-    var def=PROP_DEFS.find(function(d){return d.id===id;}), lbl=def?def.lbl:id;
-    var cx=x+w/2, cy=y+h/2;
-    var fs=vert?(w<26?7:8):11;
+    var stk=sel?"#2b6cb0":"#888",sw=sel?2:1;
+    var def=PROP_DEFS.find(function(d){return d.id===id;}),lbl=def?def.lbl:id;
+    var cx=x+w/2,cy=y+h/2,fs=vert?(w<26?7:8):11;
     var t=vert
       ?'<text x="'+cx+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-size="'+fs+'" font-weight="700" fill="#333" transform="rotate(-90 '+cx+' '+cy+')">'+lbl+'</text>'
       :'<text x="'+cx+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="700" fill="#333">'+lbl+'</text>';
     return '<g style="cursor:pointer" onclick="selectProp(\''+id+'\')"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+fill+'" stroke="'+stk+'" stroke-width="'+sw+'" rx="2"/>'+t+'</g>';
   }
   function sl(x,y,t,rot,fs,col){
-    fs=fs||9; col=col||"#fff";
+    fs=fs||9;col=col||"#fff";
     return rot
       ?'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="'+col+'" font-family="Arial" transform="rotate(-90 '+x+' '+y+')">'+t+'</text>'
       :'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="'+col+'" font-family="Arial">'+t+'</text>';
@@ -308,85 +311,92 @@ function renderMap(){
   var s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#5a9e5a"/>';
 
-  // STREETS (orange)
-  s+='<rect x="'+xS1+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>'; // NW 116TH CT full height
-  s+='<rect x="'+xIL+'" y="'+yS48LN+'" width="'+(xS2-xIL)+'" height="'+SVH+'" fill="#e8a020"/>'; // NW 48TH LN (below TH)
-  s+='<rect x="'+xS2+'" y="'+yS48LN+'" width="'+SVW+'" height="'+(yS48TR-yS48LN+SVH)+'" fill="#e8a020"/>'; // NW 116TH AVE
-  s+='<rect x="'+xCC+'" y="'+yS48TR+'" width="'+(xS3-xCC)+'" height="'+SVH+'" fill="#e8a020"/>'; // NW 48TH TERR
-  s+='<rect x="'+xS3+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>'; // NW 114TH CT full
-  s+='<rect x="'+xS4+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>'; // 114TH AVE full
+  // STREETS
+  // NW 116TH CT - full height vertical (left of inner block)
+  s+='<rect x="'+xS1+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>';
+  // NW 48TH LN - horizontal (BELOW top TH, spanning inner block width)
+  s+='<rect x="'+xIL+'" y="'+yS48LN+'" width="'+(xS2-xIL)+'" height="'+SVH+'" fill="#e8a020"/>';
+  // NW 116TH AVE - vertical, starts at yS48LN (not yTH, so TH are NOT covered)
+  s+='<rect x="'+xS2+'" y="'+yS48LN+'" width="'+SVW+'" height="'+(yS48TR-yS48LN+SVH)+'" fill="#e8a020"/>';
+  // NW 48TH TERR - horizontal bottom
+  s+='<rect x="'+xCC+'" y="'+yS48TR+'" width="'+(xS3-xCC)+'" height="'+SVH+'" fill="#e8a020"/>';
+  // NW 114TH CT - full height vertical (right side)
+  s+='<rect x="'+xS3+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>';
+  // 114TH AVE - full height vertical (far right)
+  s+='<rect x="'+xS4+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>';
 
   // LAKE
   s+='<rect x="'+xLK+'" y="'+yU+'" width="'+(xS3-xLK)+'" height="'+lakeH+'" fill="#b8ddf5" rx="4"/>';
   s+='<text x="'+(xLK+(xS3-xLK)/2)+'" y="'+(yU+lakeH/2+8)+'" text-anchor="middle" font-size="20" font-weight="700" fill="#2c6e9e" font-family="Arial">Lake</text>';
 
   // STREET LABELS
-  s+=sl(xS1+SVW/2, yU+80, "NW 116TH CT",  true, 8);
-  s+=sl(xS1+SVW/2, yLgap+80,"NW 116TH CT", true, 8);
-  s+=sl(xIL+(xS2-xIL)/2, yS48LN+SVH/2+4, "NW 48TH LN", false, 9, "#333");
-  s+=sl(xS2+SVW/2, yU+100, "NW 116TH AVE", true, 8);
-  s+=sl(xCC+(xS3-xCC)/2, yS48TR+SVH/2+4, "NW 48TH TERR", false, 11);
-  s+=sl(xS3+SVW/2, yU+80,  "NW 114TH CT",  true, 8);
-  s+=sl(xS4+SVW/2, yU+80,  "114TH AVE",    true, 8);
+  s+=sl(xS1+SVW/2, yU+80,  "NW 116TH CT",  true, 9);
+  s+=sl(xS1+SVW/2, yLbot+80,"NW 116TH CT", true, 9);
+  s+=sl(xIL+(xS2-xIL)/2, yS48LN+SVH/2+4, "NW 48TH LN", false, 10, "#333");
+  s+=sl(xS2+SVW/2, yU+100, "NW 116TH AVE", true, 9);
+  s+=sl(xCC+(xS3-xCC)/2, yS48TR+SVH/2+4, "NW 48TH TERR", false, 12);
+  s+=sl(xS3+SVW/2, yU+80,  "NW 114TH CT",  true, 9);
+  s+=sl(xS4+SVW/2, yU+80,  "114TH AVE",    true, 9);
 
-  // ── LEFT COL: top 6, gap, bottom 7 ────────────────────────
+  // LEFT COL top 6 (4896-4856) - starts at yU
   ["4896","4888","4880","4872a","4864","4856"].forEach(function(id,i){
-    s+=box(id, xLC, yU+i*(UH+G), UW, UH);
+    s+=box(id,xLC,yU+i*(UH+G),UW,UH);
   });
+  // LEFT COL bottom 7 (4848-4800) - after visual gap
   ["4848","4840a","4832","4824","4816","4808","4800"].forEach(function(id,i){
-    s+=box(id, xLC, yLgap+i*(UH+G), UW, UH);
+    s+=box(id,xLC,yLbot+i*(UH+G),UW,UH);
   });
 
-  // ── TOP TOWNHOUSES: 7 cells (TW=32, TH2=71) ───────────────
-  // Sit above inner block in green area, BELOW them is NW 48TH LN street
+  // TOP TOWNHOUSES: 7 units (11637-11601) - TH2=71px tall, in green area above NW48LN
   ["th11637","th11631","th11625","th11619","th11613","th11607","th11601"].forEach(function(id,i){
-    s+=box(id, xIL+i*(TW+G), yTH, TW, TH2, true);
+    s+=box(id,xIL+i*(TW+G),yTH,TW,TH2,true);
   });
 
-  // ── INNER BLOCK: 7 rows × 2 cols ──────────────────────────
+  // INNER BLOCK: 7 rows x 2 cols
   ["4857","4849","4841","4833a","4825","4817","4809"].forEach(function(id,i){
-    s+=box(id, xIL, yU+i*(UH+G), UW, UH);
+    s+=box(id,xIL,yU+i*(UH+G),UW,UH);
   });
   ["4850","4842","4834a","4826","4818","4810","4802"].forEach(function(id,i){
-    s+=box(id, xIR, yU+i*(UH+G), UW, UH);
+    s+=box(id,xIR,yU+i*(UH+G),UW,UH);
   });
 
-  // ── CENTER COL: 8 units ────────────────────────────────────
+  // CENTER COL: 8 units (4895-4839)
   ["4895","4887","4879","4871a","4863","4855","4847","4839"].forEach(function(id,i){
-    s+=box(id, xCC, yU+i*(UH+G), UW, UH);
+    s+=box(id,xCC,yU+i*(UH+G),UW,UH);
   });
 
-  // ── RIGHT TOP: L=5 units, R=4 units (above NW48TERR) ──────
+  // RIGHT TOP L (5): 4878,4872,4866,4860,4854
   ["4878","4872b","4866","4860","4854"].forEach(function(id,i){
-    s+=box(id, xRL, yU+i*(UH+G), UW, UH);
+    s+=box(id,xRL,yU+i*(UH+G),UW,UH);
   });
+  // RIGHT TOP R (4): 4877,4871,4865,4859
   ["4877","4871b","4865","4859"].forEach(function(id,i){
-    s+=box(id, xRR, yU+i*(UH+G), UW, UH);
+    s+=box(id,xRR,yU+i*(UH+G),UW,UH);
   });
 
-  // ── RIGHT BOTTOM: L=6 units, R=5 units (below NW48TERR) ───
-  // yRB = yS48TR+SVH+G
+  // RIGHT BOTTOM L (6): 4840,4834,4828,4822,4814,4806
   ["4840b","4834b","4828","4822","4814","4806"].forEach(function(id,i){
-    s+=box(id, xRL, yRB+i*(UH+G), UW, UH);
+    s+=box(id,xRL,yRB+i*(UH+G),UW,UH);
   });
+  // RIGHT BOTTOM R (5): 4833,4827,4821,4813,4805
   ["4833b","4827","4821","4813","4805"].forEach(function(id,i){
-    s+=box(id, xRR, yRB+i*(UH+G), UW, UH);
+    s+=box(id,xRR,yRB+i*(UH+G),UW,UH);
   });
 
-  // ── BOTTOM TH: 4 groups (7+6+6+7=26) below NW48TERR ──────
-  // BTW=22, fits: 26*22+25*3+3*8 = 572+75+24 = 671px in 492+UW+G=563px
-  // Adjust: BTW=18 -> 26*18+25*3+3*8=468+75+24=567 fits in 563... tight
-  // Use BTW=17: 26*17+25*3+3*8=442+75+24=541 <= 563 YES
-  var BTW2=17, BG=3, BGRP=8;
+  // BOTTOM TOWNHOUSES: 4 groups below NW 48TH TERR
+  // Available width: xCC to xS3 = 492+UW+G = 563px
+  // 26 units at BTW=19: 26*19+25*3+3*8=494+75+24=593 > 563
+  // Use BTW=17: 26*17+25*3+3*8=442+75+24=541 fits
+  var BTW=17,BG=3,BGRP=8;
   var g1=["th11572","th11566","th11565","th11548","th11542","th11536","th11530"];
   var g2=["th11524","th11518","th11512","th11506","th11500","th11494"];
   var g3=["th11498","th11492","th11486","th11480","th11474","th11468"];
   var g4=["th11462","th11456","th11450","th11444","th11438","th11432","th11426"];
   var bx=xCC;
-  g1.forEach(function(id,i){s+=box(id,bx+i*(BTW2+BG),yBTH,BTW2,BTH,true);}); bx+=g1.length*(BTW2+BG)+BGRP;
-  g2.forEach(function(id,i){s+=box(id,bx+i*(BTW2+BG),yBTH,BTW2,BTH,true);}); bx+=g2.length*(BTW2+BG)+BGRP;
-  g3.forEach(function(id,i){s+=box(id,bx+i*(BTW2+BG),yBTH,BTW2,BTH,true);}); bx+=g3.length*(BTW2+BG)+BGRP;
-  g4.forEach(function(id,i){s+=box(id,bx+i*(BTW2+BG),yBTH,BTW2,BTH,true);});
+  g1.forEach(function(id,i){s+=box(id,bx+i*(BTW+BG),yRB,BTW,TH2,true);}); bx+=g1.length*(BTW+BG)+BGRP;
+  g2.forEach(function(id,i){s+=box(id,bx+i*(BTW+BG),yRB,BTW,TH2,true);}); bx+=g2.length*(BTW+BG)+BGRP;
+  g3.forEach(function(id,i){s+=box(id,bx+i*(BTW+BG),yRB,BTW,TH2,true);}); bx+=g3.length*(BTW+BG)+BGRP;
+  g4.forEach(function(id,i){s+=box(id,bx+i*(BTW+BG),yRB,BTW,TH2,true);});
 
   // LEGEND
   var ly=H-16;
