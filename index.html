@@ -91,8 +91,8 @@ table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
 @media(max-width:600px){.sidebar{display:none}.topbar h1{font-size:13px}.nav-btn{font-size:11px;padding:4px 6px}.sec-body.cols4{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-<body style="background:#f0f4f8"><div id="preload" style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:system-ui;color:#1e3a5f;font-size:18px;font-weight:600">🏠 Cargando Dimensions at Doral...</div>
-<div id="login-page" class="show">
+<body style="background:#f0f4f8"><div id="preload" style="display:none;align-items:center;justify-content:center;height:100vh;font-family:system-ui;color:#1e3a5f;font-size:18px;font-weight:600">🏠 Cargando Dimensions at Doral...</div>
+<div id="login-page" style="display:flex;align-items:center;justify-content:center;height:100vh;background:#f0f4f8">
   <div class="login-box">
     <h1>🏠 Dimensions at Doral</h1>
     <p>HOA Property Management</p>
@@ -196,14 +196,14 @@ function doLogin(){
   document.getElementById('login-err').style.display='none';
   currentRole=found.role;
   sessionStorage.setItem('hoa',JSON.stringify(found));
-  document.getElementById('login-page').className='';document.getElementById('login-page').style.display='';
+  document.getElementById('login-page').style.display='none';
   document.getElementById('app').style.display='flex';
   document.getElementById('role-tag').textContent=found.role;
   loadData();
 }
 document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 document.getElementById('lu').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('lp').focus();});
-function logout(){sessionStorage.removeItem('hoa');document.getElementById('app').style.display='none';document.getElementById('login-page').className='show';document.getElementById('login-page').style.display='';DB={};selectedId=null;}
+function logout(){sessionStorage.removeItem('hoa');document.getElementById('app').style.display='none';document.getElementById('login-page').style.display='flex';DB={};selectedId=null;}
 (function(){const s=sessionStorage.getItem('hoa');if(s){try{const u=JSON.parse(s);currentRole=u.role;document.getElementById('login-page').style.display='none';document.getElementById('app').style.display='flex';document.getElementById('role-tag').textContent=u.role;loadData();}catch(e){}}})();
 
 async function loadData(){
