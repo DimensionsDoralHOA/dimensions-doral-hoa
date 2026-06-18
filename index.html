@@ -111,10 +111,10 @@ table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
       <span id="role-tag" class="role-tag">admin</span>
     </div>
     <div style="display:flex;gap:4px;flex-wrap:wrap">
-      <button class="nav-btn active" onclick="switchView('map')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂº Mapa</button>
-      <button class="nav-btn" onclick="switchView('list')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Lista</button>
-      <button class="nav-btn" onclick="switchView('search')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Buscar</button>
-      <button class="nav-btn" onclick="switchView('ie')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤ Import/Export</button>
+      <button class="nav-btn active" onclick="switchView('map')">Mapa</button>
+      <button class="nav-btn" onclick="switchView('list')">Lista</button>
+      <button class="nav-btn" onclick="switchView('search')">Buscar</button>
+      <button class="nav-btn" onclick="switchView('ie')">Import/Export</button>
       <button class="nav-btn" onclick="logout()" style="background:rgba(220,50,50,.3)">Salir</button>
     </div>
   </div>
@@ -311,7 +311,7 @@ function renderMap(){
   // STREETS (orange)
   s+='<rect x="'+xS1+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>'; // NW 116TH CT full height
   s+='<rect x="'+xIL+'" y="'+yS48LN+'" width="'+(xS2-xIL)+'" height="'+SVH+'" fill="#e8a020"/>'; // NW 48TH LN (below TH)
-  s+='<rect x="'+xS2+'" y="'+yTH+'" width="'+SVW+'" height="'+(yS48TR-yTH+SVH)+'" fill="#e8a020"/>'; // NW 116TH AVE
+  s+='<rect x="'+xS2+'" y="'+yS48LN+'" width="'+SVW+'" height="'+(yS48TR-yS48LN+SVH)+'" fill="#e8a020"/>'; // NW 116TH AVE
   s+='<rect x="'+xCC+'" y="'+yS48TR+'" width="'+(xS3-xCC)+'" height="'+SVH+'" fill="#e8a020"/>'; // NW 48TH TERR
   s+='<rect x="'+xS3+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>'; // NW 114TH CT full
   s+='<rect x="'+xS4+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>'; // 114TH AVE full
