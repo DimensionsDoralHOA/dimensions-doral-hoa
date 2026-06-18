@@ -8,3 +8,541 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a202c;height:100vh;overflow:hidden;font-size:14px}
+#login-page{display:flex;align-items:center;justify-content:center;height:100vh;background:#f0f4f8}
+.login-box{background:#fff;border-radius:12px;padding:32px;width:340px;box-shadow:0 4px 20px rgba(0,0,0,.12)}
+.login-box h1{font-size:20px;font-weight:700;color:#1e3a5f;text-align:center;margin-bottom:4px}
+.login-box p{font-size:12px;color:#718096;text-align:center;margin-bottom:20px}
+.lf{margin-bottom:12px}
+.lf label{display:block;font-size:12px;font-weight:600;margin-bottom:4px;color:#4a5568}
+.lf input{width:100%;padding:9px 11px;border:1px solid #cbd5e0;border-radius:6px;font-size:14px;outline:none}
+.lf input:focus{border-color:#1e3a5f}
+.login-btn{width:100%;padding:10px;background:#1e3a5f;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;margin-top:6px}
+.login-btn:hover{background:#2c5282}
+.login-err{background:#fed7d7;color:#c53030;padding:7px 10px;border-radius:6px;font-size:12px;margin-bottom:10px;display:none}
+#app{display:none;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{background:#1e3a5f;color:#fff;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;flex-wrap:wrap;gap:6px}
+.topbar h1{font-size:15px;font-weight:700}
+.nav-btn{background:rgba(255,255,255,.15);border:none;color:#fff;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:12px;white-space:nowrap}
+.nav-btn.active{background:rgba(255,255,255,.35);font-weight:600}
+.role-tag{padding:2px 8px;border-radius:9px;font-size:10px;font-weight:700;margin-left:6px;background:#bee3f8;color:#2c5282}
+.main{display:flex;flex:1;overflow:hidden}
+.sidebar{width:230px;background:#fff;border-right:1px solid #e2e8f0;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.sidebar-search{padding:8px;border-bottom:1px solid #e2e8f0}
+.sidebar-search input{width:100%;padding:7px 10px;border:1px solid #cbd5e0;border-radius:6px;font-size:13px;outline:none}
+.prop-list{flex:1;overflow-y:auto}
+.prop-item{padding:7px 10px;border-bottom:1px solid #f1f5f9;cursor:pointer;display:flex;align-items:center;gap:7px}
+.prop-item:hover{background:#f7fafc}
+.prop-item.active{background:#ebf4ff}
+.prop-num{background:#1e3a5f;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:700;min-width:44px;text-align:center;white-space:nowrap}
+.prop-info{overflow:hidden}
+.prop-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prop-sub{font-size:11px;color:#718096;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.content{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.view{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.map-wrap{flex:1;overflow:auto;background:#5a9e5a;padding:10px}
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:14px;overflow-y:auto}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:10px;width:100%;max-width:640px}
+.modal-hdr{background:#1e3a5f;color:#fff;padding:12px 14px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center}
+.modal-hdr h2{font-size:15px;font-weight:600}
+.modal-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1}
+.modal-body{padding:14px;max-height:75vh;overflow-y:auto}
+.sec{margin-bottom:12px;border:1px solid #e2e8f0;border-radius:7px;overflow:hidden}
+.sec-title{background:#f7fafc;padding:6px 11px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#4a5568;border-bottom:1px solid #e2e8f0}
+.sec-body{padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sec-body.cols1{grid-template-columns:1fr}
+.sec-body.cols4{grid-template-columns:repeat(4,1fr)}
+.field label{display:block;font-size:10px;color:#718096;font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+.field .vv{font-size:13px;color:#2d3748;min-height:18px}
+.field .vv.empty{color:#a0aec0;font-style:italic;font-size:12px}
+.field input,.field select,.field textarea{width:100%;padding:6px 8px;border:1px solid #cbd5e0;border-radius:5px;font-size:13px;outline:none;display:none;background:#fff;color:#1a202c}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#3182ce}
+.editing .field input,.editing .field select,.editing .field textarea{display:block}
+.editing .field .vv{display:none}
+.modal-footer{padding:10px 14px;border-top:1px solid #e2e8f0;display:flex;gap:8px;justify-content:flex-end;background:#fff;border-radius:0 0 10px 10px}
+.btn{padding:7px 14px;border-radius:6px;border:none;cursor:pointer;font-size:13px;font-weight:500}
+.btn-primary{background:#1e3a5f;color:#fff}
+.btn-success{background:#276749;color:#fff}
+.btn-secondary{background:#edf2f7;color:#4a5568}
+.list-wrap{flex:1;overflow-y:auto;padding:8px}
+table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);table-layout:fixed}
+.tbl th{background:#1e3a5f;color:#fff;padding:9px 10px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.tbl td{padding:8px 10px;border-bottom:1px solid #f1f5f9;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+.tbl tr:hover td{background:#f7fafc}
+.badge{display:inline-block;padding:2px 7px;border-radius:9px;font-size:11px;font-weight:600}
+.badge-blue{background:#bee3f8;color:#2c5282}
+.badge-green{background:#c6f6d5;color:#276749}
+.search-wrap{flex:1;overflow-y:auto;padding:12px}
+.search-wrap>input{width:100%;max-width:500px;padding:10px 14px;border:1px solid #cbd5e0;border-radius:8px;font-size:15px;outline:none;margin-bottom:12px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:10px;cursor:pointer}
+.card:hover{border-color:#90cdf4}
+.ie-wrap{flex:1;overflow-y:auto;padding:14px}
+.ie-card{background:#fff;border-radius:8px;padding:14px;margin-bottom:10px;border:1px solid #e2e8f0}
+.ie-card h3{font-size:14px;font-weight:600;margin-bottom:8px;color:#2d3748}
+.ie-card p{font-size:12px;color:#718096;margin-bottom:10px;line-height:1.5}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:#f7fafc;border-radius:7px;padding:10px;text-align:center}
+.stat-n{font-size:22px;font-weight:700;color:#1e3a5f}
+.stat-l{font-size:11px;color:#718096;margin-top:2px}
+.toast{position:fixed;bottom:16px;right:16px;background:#276749;color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;z-index:999;transition:opacity .3s}
+.loading{display:flex;align-items:center;justify-content:center;height:100%;color:#718096;gap:8px;font-size:14px}
+@media(max-width:600px){.sidebar{display:none}.topbar h1{font-size:13px}.nav-btn{font-size:11px;padding:4px 6px}.sec-body.cols4{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="login-page">
+  <div class="login-box">
+    <h1>🏠 Dimensions at Doral</h1>
+    <p>HOA Property Management</p>
+    <div id="login-err" class="login-err">Usuario o contraseña incorrectos</div>
+    <div class="lf"><label>Usuario</label><input id="lu" placeholder="admin o viewer" autocomplete="username"/></div>
+    <div class="lf"><label>Contraseña</label><input id="lp" type="password" autocomplete="current-password"/></div>
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <div style="margin-top:12px;font-size:11px;color:#a0aec0;text-align:center">Admin: admin / doral2024 &nbsp;·&nbsp; Viewer: viewer / view2024</div>
+  </div>
+</div>
+
+<div id="app" style="display:none;flex-direction:column;height:100vh;overflow:hidden">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span>🏠</span><h1>Dimensions at Doral HOA</h1>
+      <span id="role-tag" class="role-tag">admin</span>
+    </div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="nav-btn active" onclick="switchView('map')">🗺 Mapa</button>
+      <button class="nav-btn" onclick="switchView('list')">📋 Lista</button>
+      <button class="nav-btn" onclick="switchView('search')">🔍 Buscar</button>
+      <button class="nav-btn" onclick="switchView('ie')">📤 Import/Export</button>
+      <button class="nav-btn" onclick="logout()" style="background:rgba(220,50,50,.3)">Salir</button>
+    </div>
+  </div>
+  <div class="main">
+    <div class="sidebar">
+      <div class="sidebar-search"><input id="sb-search" placeholder="Buscar..." oninput="renderSidebar()"/></div>
+      <div id="prop-list" class="prop-list"></div>
+    </div>
+    <div class="content">
+      <div id="view-map" class="view"><div id="map-container" class="map-wrap"></div></div>
+      <div id="view-list" class="view" style="display:none"><div class="list-wrap"><table class="tbl"><thead><tr><th style="width:70px">Unidad</th><th>Homeowner 1</th><th>Homeowner 2</th><th>Tenant</th><th>Keyfobs</th><th>Mascota</th></tr></thead><tbody id="list-body"></tbody></table></div></div>
+      <div id="view-search" class="view" style="display:none"><div class="search-wrap"><input id="main-search" placeholder="Buscar por unidad, nombre, keyfob, mascota..." oninput="renderSearch()"/><div id="search-grid" class="cards-grid"></div></div></div>
+      <div id="view-ie" class="view" style="display:none"><div class="ie-wrap" id="ie-content"></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="overlay" class="overlay" onclick="overlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-hdr"><h2 id="modal-title">Unidad</h2><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+<div id="toast" class="toast" style="display:none"></div>
+
+<script>
+const SB_URL='https://umcajekaztqupduxrwzg.supabase.co';
+const SB_KEY='sb_publishable_2Fnvj9o6NCmXJnHgcBE-Nw_GRgXr9Or';
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const USERS=[{u:'admin',p:'doral2024',role:'admin'},{u:'viewer',p:'view2024',role:'viewer'}];
+let DB={}, currentView='map', selectedId=null, currentRole='admin';
+
+// ── PROPERTY DEFINITIONS (exact match to original map image) ─
+const PROP_DEFS=[
+  // Left column (west side, top to bottom)
+  {id:'4896',lbl:'4896'},{id:'4888',lbl:'4888'},{id:'4880',lbl:'4880'},
+  {id:'4872a',lbl:'4872'},{id:'4864',lbl:'4864'},{id:'4856',lbl:'4856'},
+  {id:'4848',lbl:'4848'},{id:'4840a',lbl:'4840'},{id:'4832',lbl:'4832'},
+  {id:'4824',lbl:'4824'},{id:'4816',lbl:'4816'},{id:'4808',lbl:'4808'},{id:'4800',lbl:'4800'},
+  // Inner block LEFT column
+  {id:'4857',lbl:'4857'},{id:'4849',lbl:'4849'},{id:'4841',lbl:'4841'},
+  {id:'4833a',lbl:'4833'},{id:'4825',lbl:'4825'},{id:'4817',lbl:'4817'},{id:'4809',lbl:'4809'},
+  // Inner block RIGHT column
+  {id:'4850',lbl:'4850'},{id:'4842',lbl:'4842'},{id:'4834a',lbl:'4834'},
+  {id:'4826',lbl:'4826'},{id:'4818',lbl:'4818'},{id:'4810',lbl:'4810'},{id:'4802',lbl:'4802'},
+  // NW 48TH LN townhouses (vertical, top row)
+  {id:'th11637',lbl:'11637'},{id:'th11631',lbl:'11631'},{id:'th11625',lbl:'11625'},
+  {id:'th11619',lbl:'11619'},{id:'th11613',lbl:'11613'},{id:'th11607',lbl:'11607'},
+  // Center column (NW 116 AVE east side)
+  {id:'4895',lbl:'4895'},{id:'4887',lbl:'4887'},{id:'4879',lbl:'4879'},
+  {id:'4871a',lbl:'4871'},{id:'4863',lbl:'4863'},{id:'4855',lbl:'4855'},
+  {id:'4847',lbl:'4847'},{id:'4839',lbl:'4839'},
+  // Bottom townhouses (NW 48 TERR south side, left to right)
+  {id:'th11572',lbl:'11572'},{id:'th11566',lbl:'11566'},{id:'th11565',lbl:'11565'},
+  {id:'th11548',lbl:'11548'},{id:'th11542',lbl:'11542'},{id:'th11536',lbl:'11536'},
+  {id:'th11530',lbl:'11530'},{id:'th11524',lbl:'11524'},{id:'th11518',lbl:'11518'},
+  {id:'th11512',lbl:'11512'},{id:'th11506',lbl:'11506'},{id:'th11500',lbl:'11500'},
+  // Right side - NW 114 CT area
+  {id:'4840b',lbl:'4840'},
+  {id:'4834b',lbl:'4834'},{id:'4833b',lbl:'4833'},
+  {id:'4828',lbl:'4828'},{id:'4827',lbl:'4827'},
+  {id:'4822',lbl:'4822'},{id:'4821',lbl:'4821'},
+  {id:'4814',lbl:'4814'},{id:'4813',lbl:'4813'},
+  {id:'4806',lbl:'4806'},{id:'4805',lbl:'4805'},
+  // Right top - NW 114 CT / 114TH AVE
+  {id:'4878',lbl:'4878'},{id:'4877',lbl:'4877'},
+  {id:'4872b',lbl:'4872'},{id:'4871b',lbl:'4871'},
+  {id:'4866',lbl:'4866'},{id:'4865',lbl:'4865'},
+  {id:'4860',lbl:'4860'},{id:'4859',lbl:'4859'},
+  {id:'4854',lbl:'4854'},
+  // Far right townhouses
+  {id:'th11474',lbl:'11474'},{id:'th11468',lbl:'11468'},
+  {id:'th11462',lbl:'11462'},{id:'th11456',lbl:'11456'},{id:'th11450',lbl:'11450'},
+  {id:'th11444',lbl:'11444'},{id:'th11438',lbl:'11438'},{id:'th11432',lbl:'11432'},
+  {id:'th11426',lbl:'11426'},
+];
+
+// ── MAP LAYOUT — pixel-perfect match to the original image ───
+// Scale: ~1400px wide SVG, matching original proportions
+const R=[
+  // LEFT COLUMN (x=55, width=90)
+  {id:'4896', x:55,  y:55,  w:90, h:38},
+  {id:'4888', x:55,  y:101, w:90, h:38},
+  {id:'4880', x:55,  y:147, w:90, h:38},
+  {id:'4872a',x:55,  y:193, w:90, h:38},
+  {id:'4864', x:55,  y:239, w:90, h:38},
+  {id:'4856', x:55,  y:285, w:90, h:38},
+  {id:'4848', x:55,  y:358, w:90, h:38},
+  {id:'4840a',x:55,  y:404, w:90, h:38},
+  {id:'4832', x:55,  y:450, w:90, h:38},
+  {id:'4824', x:55,  y:496, w:90, h:38},
+  {id:'4816', x:55,  y:542, w:90, h:38},
+  {id:'4808', x:55,  y:588, w:90, h:38},
+  {id:'4800', x:55,  y:634, w:90, h:38},
+
+  // INNER BLOCK — LEFT column (x=200)
+  {id:'4857', x:200, y:270, w:90, h:38},
+  {id:'4849', x:200, y:316, w:90, h:38},
+  {id:'4841', x:200, y:362, w:90, h:38},
+  {id:'4833a',x:200, y:408, w:90, h:38},
+  {id:'4825', x:200, y:454, w:90, h:38},
+  {id:'4817', x:200, y:500, w:90, h:38},
+  {id:'4809', x:200, y:546, w:90, h:38},
+
+  // INNER BLOCK — RIGHT column (x=300)
+  {id:'4850', x:300, y:270, w:90, h:38},
+  {id:'4842', x:300, y:316, w:90, h:38},
+  {id:'4834a',x:300, y:362, w:90, h:38},
+  {id:'4826', x:300, y:408, w:90, h:38},
+  {id:'4818', x:300, y:454, w:90, h:38},
+  {id:'4810', x:300, y:500, w:90, h:38},
+  {id:'4802', x:300, y:546, w:90, h:38},
+
+  // NW 48TH LN — vertical townhouses (top, x=175..410, y=48)
+  {id:'th11637',x:178, y:48, w:36, h:72, v:1},
+  {id:'th11631',x:218, y:48, w:36, h:72, v:1},
+  {id:'th11625',x:258, y:48, w:36, h:72, v:1},
+  {id:'th11619',x:298, y:48, w:36, h:72, v:1},
+  {id:'th11613',x:338, y:48, w:36, h:72, v:1},
+  {id:'th11607',x:378, y:48, w:36, h:72, v:1},
+
+  // CENTER COLUMN (x=418, width=88) — NW 116 AVE east
+  {id:'4895', x:418, y:42,  w:88, h:38},
+  {id:'4887', x:418, y:88,  w:88, h:38},
+  {id:'4879', x:418, y:134, w:88, h:38},
+  {id:'4871a',x:418, y:180, w:88, h:38},
+  {id:'4863', x:418, y:226, w:88, h:38},
+  {id:'4855', x:418, y:272, w:88, h:38},
+  {id:'4847', x:418, y:318, w:88, h:38},
+  {id:'4839', x:418, y:364, w:88, h:38},
+
+  // BOTTOM TOWNHOUSES — NW 48 TERR south (vertical labels)
+  {id:'th11572',x:430, y:462, w:38, h:65, v:1},
+  {id:'th11566',x:472, y:462, w:38, h:65, v:1},
+  {id:'th11565',x:514, y:462, w:38, h:65, v:1},
+  {id:'th11548',x:556, y:462, w:38, h:65, v:1},
+  {id:'th11542',x:598, y:462, w:38, h:65, v:1},
+  {id:'th11536',x:640, y:462, w:38, h:65, v:1},
+  {id:'th11530',x:682, y:462, w:38, h:65, v:1},
+  {id:'th11524',x:724, y:462, w:38, h:65, v:1},
+  {id:'th11518',x:766, y:462, w:38, h:65, v:1},
+  {id:'th11512',x:808, y:462, w:38, h:65, v:1},
+  {id:'th11506',x:850, y:462, w:38, h:65, v:1},
+  {id:'th11500',x:892, y:462, w:38, h:65, v:1},
+
+  // RIGHT SIDE — NW 114 CT area (two columns)
+  // Left col of right side (x=898)
+  {id:'4840b',x:898, y:316, w:90, h:38},
+  {id:'4834b',x:898, y:362, w:90, h:38},
+  {id:'4828', x:898, y:408, w:90, h:38},
+  {id:'4822', x:898, y:454, w:90, h:38},
+  {id:'4814', x:898, y:500, w:90, h:38},
+  {id:'4806', x:898, y:546, w:90, h:38},
+  // Right col of right side (x=998)
+  {id:'4833b',x:998, y:362, w:90, h:38},
+  {id:'4827', x:998, y:408, w:90, h:38},
+  {id:'4821', x:998, y:454, w:90, h:38},
+  {id:'4813', x:998, y:500, w:90, h:38},
+  {id:'4805', x:998, y:546, w:90, h:38},
+
+  // RIGHT TOP — two columns (x=898 and x=998)
+  {id:'4878', x:898, y:50,  w:90, h:38},
+  {id:'4872b',x:898, y:96,  w:90, h:38},
+  {id:'4866', x:898, y:142, w:90, h:38},
+  {id:'4860', x:898, y:188, w:90, h:38},
+  {id:'4854', x:898, y:234, w:90, h:38},
+  {id:'4877', x:998, y:50,  w:90, h:38},
+  {id:'4871b',x:998, y:96,  w:90, h:38},
+  {id:'4865', x:998, y:142, w:90, h:38},
+  {id:'4859', x:998, y:188, w:90, h:38},
+
+  // FAR RIGHT townhouses (x=1100+)
+  {id:'th11474',x:1100, y:462, w:38, h:65, v:1},
+  {id:'th11468',x:1142, y:462, w:38, h:65, v:1},
+  {id:'th11462',x:1184, y:462, w:38, h:65, v:1},
+  {id:'th11456',x:1226, y:462, w:38, h:65, v:1},
+  {id:'th11450',x:1268, y:462, w:38, h:65, v:1},
+  {id:'th11444',x:1310, y:462, w:38, h:65, v:1},
+  {id:'th11438',x:1352, y:462, w:38, h:65, v:1},
+  {id:'th11432',x:1394, y:462, w:38, h:65, v:1},
+  {id:'th11426',x:1436, y:462, w:38, h:65, v:1},
+];
+
+function empty(id,lbl){
+  return{id,unit:lbl,address:'',homeowner1:'',homeowner2:'',
+    tenant1_name:'',tenant1_phone:'',tenant1_email:'',
+    tenant2_name:'',tenant2_phone:'',tenant2_email:'',
+    occ1_name:'',occ1_phone:'',occ1_email:'',
+    occ2_name:'',occ2_phone:'',occ2_email:'',
+    kf1:'',kf2:'',kf3:'',kf4:'',kf5:'',kf6:'',kf7:'',kf8:'',
+    pet1_name:'',pet1_breed:'',pet1_gender:'',
+    pet2_name:'',pet2_breed:'',pet2_gender:'',notes:''};
+}
+function hasData(p){return p&&!!(p.homeowner1||p.homeowner2||p.tenant1_name||p.kf1||p.pet1_name);}
+
+// ── AUTH ──────────────────────────────────────────────────────
+function doLogin(){
+  const u=document.getElementById('lu').value.trim();
+  const p=document.getElementById('lp').value;
+  const found=USERS.find(x=>x.u===u&&x.p===p);
+  if(!found){document.getElementById('login-err').style.display='block';return;}
+  document.getElementById('login-err').style.display='none';
+  currentRole=found.role;
+  sessionStorage.setItem('hoa',JSON.stringify(found));
+  document.getElementById('login-page').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.getElementById('role-tag').textContent=found.role;
+  loadData();
+}
+document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+document.getElementById('lu').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('lp').focus();});
+function logout(){sessionStorage.removeItem('hoa');document.getElementById('app').style.display='none';document.getElementById('login-page').style.display='flex';DB={};selectedId=null;}
+(function(){const s=sessionStorage.getItem('hoa');if(s){try{const u=JSON.parse(s);currentRole=u.role;document.getElementById('login-page').style.display='none';document.getElementById('app').style.display='flex';document.getElementById('role-tag').textContent=u.role;loadData();}catch(e){}}})();
+
+// ── DATA ──────────────────────────────────────────────────────
+async function loadData(){
+  document.getElementById('map-container').innerHTML='<div class="loading">⏳ Cargando datos...</div>';
+  const{data}=await sb.from('properties').select('*');
+  PROP_DEFS.forEach(d=>{DB[d.id]=empty(d.id,d.lbl);});
+  if(data)data.forEach(r=>{if(DB[r.id])DB[r.id]={...DB[r.id],...r};else DB[r.id]=r;});
+  renderAll();
+}
+async function saveProp(p){
+  const{error}=await sb.from('properties').upsert({...p,updated_at:new Date().toISOString()},{onConflict:'id'});
+  if(!error){DB[p.id]=p;renderAll();showToast('✅ Guardado');}
+  else showToast('❌ Error: '+error.message);
+}
+function allProps(){return Object.values(DB).sort((a,b)=>a.unit.localeCompare(b.unit,undefined,{numeric:true}));}
+function filteredProps(q){
+  if(!q)return allProps();
+  q=q.toLowerCase();
+  return allProps().filter(p=>[p.unit,p.address,p.homeowner1,p.homeowner2,p.tenant1_name,p.tenant2_name,p.kf1,p.kf2,p.kf3,p.kf4,p.pet1_name,p.pet1_breed,p.occ1_name,p.occ2_name].some(v=>(v||'').toLowerCase().includes(q)));
+}
+
+// ── RENDER ────────────────────────────────────────────────────
+function renderAll(){renderMap();renderSidebar();renderList();renderSearch();renderIE();}
+
+function renderSidebar(){
+  const q=document.getElementById('sb-search').value;
+  document.getElementById('prop-list').innerHTML=filteredProps(q).map(p=>`
+    <div class="prop-item${selectedId===p.id?' active':''}" onclick="selectProp('${p.id}')">
+      <span class="prop-num">${p.unit}</span>
+      <div class="prop-info">
+        <div class="prop-name">${p.homeowner1||'<span style="color:#a0aec0;font-size:11px">Sin datos</span>'}</div>
+        ${p.tenant1_name?`<div class="prop-sub">${p.tenant1_name}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function renderMap(){
+  const W=1540, H=560;
+  let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block;min-width:900px">
+  <rect width="${W}" height="${H}" fill="#6ab06a" rx="8"/>
+  <!-- Lake -->
+  <rect x="516" y="38" width="370" height="270" fill="#87ceeb" rx="10"/>
+  <text x="701" y="178" text-anchor="middle" fill="#1a5276" font-size="16" font-weight="700">Lake</text>
+  <!-- Road labels -->
+  <text x="128" y="330" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">NW 116 CT</text>
+  <text x="128" y="615" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">NW 116 CT</text>
+  <text x="403" y="420" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" transform="rotate(-90 403 420)">NW 116 AVE</text>
+  <text x="700" y="432" text-anchor="middle" fill="#e8f5e8" font-size="14" font-weight="700">NW 48 TERR</text>
+  <text x="950" y="300" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">NW 114 CT</text>
+  <text x="700" y="26" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">NW 48TH LN</text>`;
+
+  R.forEach(u=>{
+    const p=DB[u.id];
+    const sel=selectedId===u.id;
+    const fill=sel?'#90cdf4':hasData(p)?'#b7e4c7':'#fce4e4';
+    const stroke=sel?'#2b6cb0':'#999';
+    const sw=sel?2.5:1;
+    const def=PROP_DEFS.find(d=>d.id===u.id);
+    const lbl=def?def.lbl:u.id;
+    const cx=u.x+u.w/2, cy=u.y+u.h/2;
+    const txt=u.v
+      ?`<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle" font-size="9" font-weight="700" fill="#2d3748" transform="rotate(-90 ${cx} ${cy})">${lbl}</text>`
+      :`<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle" font-size="${u.w>70?12:10}" font-weight="700" fill="#2d3748">${lbl}</text>`;
+    s+=`<g style="cursor:pointer" onclick="selectProp('${u.id}')"><rect x="${u.x}" y="${u.y}" width="${u.w}" height="${u.h}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" rx="4"/>${txt}</g>`;
+  });
+
+  s+=`</svg>
+  <div style="display:flex;gap:14px;padding:6px 4px;font-size:12px;align-items:center;margin-top:6px">
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:16px;background:#b7e4c7;border:1px solid #999;border-radius:3px;display:inline-block"></span>Con datos</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:16px;background:#fce4e4;border:1px solid #999;border-radius:3px;display:inline-block"></span>Sin datos</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:16px;background:#90cdf4;border:2px solid #2b6cb0;border-radius:3px;display:inline-block"></span>Seleccionado</span>
+  </div>`;
+  document.getElementById('map-container').innerHTML=s;
+}
+
+function renderList(){
+  document.getElementById('list-body').innerHTML=filteredProps(document.getElementById('sb-search').value).map(p=>`
+    <tr onclick="selectProp('${p.id}');switchView('map')">
+      <td><span class="badge badge-blue">${p.unit}</span></td>
+      <td>${p.homeowner1||'—'}</td><td>${p.homeowner2||'—'}</td>
+      <td>${p.tenant1_name||'—'}</td>
+      <td>${[1,2,3,4,5,6,7,8].filter(n=>p['kf'+n]).map(n=>`<span class="badge badge-green">${p['kf'+n]}</span>`).join(' ')}</td>
+      <td>${p.pet1_name?'🐾 '+p.pet1_name:''}</td>
+    </tr>`).join('');
+}
+
+function renderSearch(){
+  const q=(document.getElementById('main-search')||{value:''}).value;
+  const el=document.getElementById('search-grid');if(!el)return;
+  el.innerHTML=filteredProps(q).map(p=>`
+    <div class="card" onclick="selectProp('${p.id}');switchView('map')">
+      <div style="display:flex;gap:6px;margin-bottom:5px;align-items:center">
+        <span class="badge badge-blue">${p.unit}</span>${hasData(p)?'<span class="badge badge-green">✓</span>':''}
+      </div>
+      <div style="font-size:13px;font-weight:500">${p.homeowner1||'<span style="color:#a0aec0;font-size:12px">Sin datos</span>'}</div>
+      ${p.tenant1_name?`<div style="font-size:12px;color:#718096">T: ${p.tenant1_name}</div>`:''}
+      ${p.kf1?`<div style="font-size:12px;color:#718096">🔑 ${p.kf1}</div>`:''}
+      ${p.pet1_name?`<div style="font-size:12px;color:#718096">🐾 ${p.pet1_name}</div>`:''}
+    </div>`).join('');
+}
+
+function renderIE(){
+  const t=Object.keys(DB).length,d=Object.values(DB).filter(hasData).length;
+  const ro=currentRole==='viewer';
+  document.getElementById('ie-content').innerHTML=ro?'<p style="color:#718096;padding:16px">Necesitas acceso admin.</p>':`
+    <div class="ie-card"><h3>📤 Exportar a CSV</h3><p>Descarga todos los datos en Excel/Numbers.</p><button class="btn btn-primary" onclick="exportCSV()">Descargar CSV</button></div>
+    <div class="ie-card"><h3>📥 Importar desde CSV</h3><p>Columnas requeridas: id, unit, homeowner1, homeowner2, tenant1_name, tenant1_phone, tenant1_email, tenant2_name, tenant2_phone, tenant2_email, occ1_name, occ1_phone, occ1_email, occ2_name, occ2_phone, occ2_email, kf1…kf8, pet1_name, pet1_breed, pet1_gender, pet2_name, pet2_breed, pet2_gender, notes</p><input type="file" accept=".csv" onchange="importCSV(event)"/></div>
+    <div class="ie-card"><h3>📊 Estadísticas</h3><div class="stat-grid">
+      <div class="stat"><div class="stat-n">${t}</div><div class="stat-l">Total</div></div>
+      <div class="stat"><div class="stat-n">${d}</div><div class="stat-l">Con datos</div></div>
+      <div class="stat"><div class="stat-n">${t-d}</div><div class="stat-l">Sin datos</div></div>
+    </div></div>`;
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────
+function switchView(v){
+  currentView=v;
+  ['map','list','search','ie'].forEach(n=>document.getElementById('view-'+n).style.display=n===v?'flex':'none');
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active',['map','list','search','ie'][i]===v));
+  if(v==='search')setTimeout(()=>document.getElementById('main-search').focus(),50);
+}
+function selectProp(id){selectedId=id;renderSidebar();renderMap();openModal(id);}
+function overlayClick(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+// ── MODAL ─────────────────────────────────────────────────────
+function openModal(id){
+  const p=DB[id]||{};
+  document.getElementById('modal-title').textContent='Unidad '+p.unit;
+  document.getElementById('overlay').classList.add('open');
+  renderModalBody(p,false);renderModalFooter(p,false);
+}
+function closeModal(){document.getElementById('overlay').classList.remove('open');}
+
+function fld(label,key,p,type='text'){
+  const val=(p[key]||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const disp=(p[key]||'');
+  if(type==='select')return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'—'}</div><select name="${key}"><option value="">—</option><option${disp==='Male'?' selected':''}>Male</option><option${disp==='Female'?' selected':''}>Female</option></select></div>`;
+  if(type==='textarea')return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'—'}</div><textarea name="${key}" rows="3">${disp}</textarea></div>`;
+  return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'—'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
+}
+function fldFull(label,key,p,type='text'){
+  const val=(p[key]||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const disp=(p[key]||'');
+  return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'—'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
+}
+
+function renderModalBody(p,editing){
+  const ro=currentRole==='viewer';
+  const cls=editing&&!ro?'editing':'';
+  document.getElementById('modal-body').innerHTML=`<div class="${cls}" id="fw">
+  <div class="sec"><div class="sec-title">Propiedad</div><div class="sec-body cols1">${fld('Dirección','address',p)}</div></div>
+  <div class="sec"><div class="sec-title">Homeowners</div><div class="sec-body">${fld('Homeowner 1','homeowner1',p)}${fld('Homeowner 2','homeowner2',p)}</div></div>
+  <div class="sec"><div class="sec-title">Tenant 1</div><div class="sec-body">${fld('Nombre','tenant1_name',p)}${fld('Teléfono','tenant1_phone',p)}${fldFull('Email','tenant1_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Tenant 2</div><div class="sec-body">${fld('Nombre','tenant2_name',p)}${fld('Teléfono','tenant2_phone',p)}${fldFull('Email','tenant2_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Occupant Adicional 1</div><div class="sec-body">${fld('Nombre','occ1_name',p)}${fld('Teléfono','occ1_phone',p)}${fldFull('Email','occ1_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Occupant Adicional 2</div><div class="sec-body">${fld('Nombre','occ2_name',p)}${fld('Teléfono','occ2_phone',p)}${fldFull('Email','occ2_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Keyfobs</div><div class="sec-body cols4">${[1,2,3,4,5,6,7,8].map(n=>fld('Keyfob '+n,'kf'+n,p)).join('')}</div></div>
+  <div class="sec"><div class="sec-title">Mascota 1</div><div class="sec-body">${fld('Nombre','pet1_name',p)}${fld('Raza','pet1_breed',p)}${fld('Género','pet1_gender',p,'select')}</div></div>
+  <div class="sec"><div class="sec-title">Mascota 2</div><div class="sec-body">${fld('Nombre','pet2_name',p)}${fld('Raza','pet2_breed',p)}${fld('Género','pet2_gender',p,'select')}</div></div>
+  <div class="sec"><div class="sec-title">Notas</div><div class="sec-body cols1">${fld('Notas','notes',p,'textarea')}</div></div>
+  </div>`;
+}
+
+function renderModalFooter(p,editing){
+  const ro=currentRole==='viewer';
+  document.getElementById('modal-footer').innerHTML=
+    ro?`<button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`:
+    editing?`<button class="btn btn-success" onclick="saveModal('${p.id}')">💾 Guardar</button>
+              <button class="btn btn-secondary" onclick="openModal('${p.id}')">Cancelar</button>
+              <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`:
+             `<button class="btn btn-primary" onclick="editModal('${p.id}')">✏️ Editar</button>
+              <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`;
+}
+function editModal(id){const p=DB[id]||{};renderModalBody(p,true);renderModalFooter(p,true);}
+async function saveModal(id){
+  const p=DB[id]||{};const fw=document.getElementById('fw');const updated={...p};
+  fw.querySelectorAll('input,select').forEach(el=>{if(el.name)updated[el.name]=el.value;});
+  fw.querySelectorAll('textarea').forEach(el=>{if(el.name)updated[el.name]=el.value;});
+  document.getElementById('modal-footer').innerHTML='<span style="color:#718096;font-size:13px">💾 Guardando...</span>';
+  await saveProp(updated);openModal(id);
+}
+
+// ── EXPORT/IMPORT ─────────────────────────────────────────────
+function exportCSV(){
+  const cols=['id','unit','address','homeowner1','homeowner2','tenant1_name','tenant1_phone','tenant1_email','tenant2_name','tenant2_phone','tenant2_email','occ1_name','occ1_phone','occ1_email','occ2_name','occ2_phone','occ2_email','kf1','kf2','kf3','kf4','kf5','kf6','kf7','kf8','pet1_name','pet1_breed','pet1_gender','pet2_name','pet2_breed','pet2_gender','notes'];
+  const csv=[cols.join(','),...allProps().map(p=>cols.map(c=>`"${(p[c]||'').toString().replace(/"/g,'""')}"`).join(','))].join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='dimensions_doral_hoa.csv';a.click();
+  showToast('📥 CSV exportado');
+}
+async function importCSV(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=async ev=>{
+    try{
+      const lines=ev.target.result.split('\n').filter(l=>l.trim());
+      const headers=lines[0].split(',').map(h=>h.replace(/^"|"$/g,'').trim());
+      const rows=lines.slice(1).map(line=>{
+        const vals=[];let cur='',inQ=false;
+        for(const ch of line){if(ch==='"')inQ=!inQ;else if(ch===','&&!inQ){vals.push(cur);cur='';}else cur+=ch;}
+        vals.push(cur);
+        const obj={};headers.forEach((h,i)=>{obj[h]=(vals[i]||'').replace(/^"|"$/g,'');});return obj;
+      }).filter(r=>r.id||r.unit);
+      const{error}=await sb.from('properties').upsert(rows,{onConflict:'id'});
+      if(!error){await loadData();showToast('✅ Importado: '+rows.length+' registros');}
+      else showToast('❌ Error: '+error.message);
+    }catch(err){showToast('❌ Error: '+err.message);}
+  };
+  reader.readAsText(file,'UTF-8');e.target.value='';
+}
+
+function showToast(msg){
+  const el=document.getElementById('toast');el.textContent=msg;el.style.display='block';el.style.opacity='1';
+  setTimeout(()=>{el.style.opacity='0';setTimeout(()=>el.style.display='none',300);},3000);
+}
+</script>
+</body>
+</html>
