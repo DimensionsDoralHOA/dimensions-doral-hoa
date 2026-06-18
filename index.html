@@ -91,30 +91,30 @@ table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
 @media(max-width:600px){.sidebar{display:none}.topbar h1{font-size:13px}.nav-btn{font-size:11px;padding:4px 6px}.sec-body.cols4{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-<body style="background:#f0f4f8"><div id="preload" style="display:none;align-items:center;justify-content:center;height:100vh;font-family:system-ui;color:#1e3a5f;font-size:18px;font-weight:600">ÃÂ°ÃÂÃÂÃÂ  Cargando Dimensions at Doral...</div>
+<body style="background:#f0f4f8"><div id="preload" style="display:none;align-items:center;justify-content:center;height:100vh;font-family:system-ui;color:#1e3a5f;font-size:18px;font-weight:600">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ  Cargando Dimensions at Doral...</div>
 <div id="login-page" style="display:flex;align-items:center;justify-content:center;height:100vh;background:#f0f4f8">
   <div class="login-box">
-    <h1>ÃÂ°ÃÂÃÂÃÂ  Dimensions at Doral</h1>
+    <h1>ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ  Dimensions at Doral</h1>
     <p>HOA Property Management</p>
-    <div id="login-err" class="login-err">Usuario o contraseÃÂÃÂ±a incorrectos</div>
+    <div id="login-err" class="login-err">Usuario o contraseÃÂÃÂÃÂÃÂ±a incorrectos</div>
     <div class="lf"><label>Usuario</label><input id="lu" placeholder="admin o viewer" autocomplete="username"/></div>
-    <div class="lf"><label>ContraseÃÂÃÂ±a</label><input id="lp" type="password" autocomplete="current-password"/></div>
+    <div class="lf"><label>ContraseÃÂÃÂÃÂÃÂ±a</label><input id="lp" type="password" autocomplete="current-password"/></div>
     <button class="login-btn" onclick="doLogin()">Entrar</button>
-    <div style="margin-top:12px;font-size:11px;color:#a0aec0;text-align:center">Admin: admin / doral2024 &nbsp;ÃÂÃÂ·&nbsp; Viewer: viewer / view2024</div>
+    <div style="margin-top:12px;font-size:11px;color:#a0aec0;text-align:center">Admin: admin / doral2024 &nbsp;ÃÂÃÂÃÂÃÂ·&nbsp; Viewer: viewer / view2024</div>
   </div>
 </div>
 
 <div id="app" style="display:none;flex-direction:column;height:100vh;overflow:hidden">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:8px">
-      <span>ÃÂ°ÃÂÃÂÃÂ </span><h1>Dimensions at Doral HOA</h1>
+      <span>ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ </span><h1>Dimensions at Doral HOA</h1>
       <span id="role-tag" class="role-tag">admin</span>
     </div>
     <div style="display:flex;gap:4px;flex-wrap:wrap">
-      <button class="nav-btn active" onclick="switchView('map')">ÃÂ°ÃÂÃÂÃÂº Mapa</button>
-      <button class="nav-btn" onclick="switchView('list')">ÃÂ°ÃÂÃÂÃÂ Lista</button>
-      <button class="nav-btn" onclick="switchView('search')">ÃÂ°ÃÂÃÂÃÂ Buscar</button>
-      <button class="nav-btn" onclick="switchView('ie')">ÃÂ°ÃÂÃÂÃÂ¤ Import/Export</button>
+      <button class="nav-btn active" onclick="switchView('map')">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂº Mapa</button>
+      <button class="nav-btn" onclick="switchView('list')">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Lista</button>
+      <button class="nav-btn" onclick="switchView('search')">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Buscar</button>
+      <button class="nav-btn" onclick="switchView('ie')">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¤ Import/Export</button>
       <button class="nav-btn" onclick="logout()" style="background:rgba(220,50,50,.3)">Salir</button>
     </div>
   </div>
@@ -134,7 +134,7 @@ table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
 
 <div id="overlay" class="overlay" onclick="overlayClick(event)">
   <div class="modal" id="modal">
-    <div class="modal-hdr"><h2 id="modal-title">Unidad</h2><button class="modal-close" onclick="closeModal()">ÃÂ¢ÃÂÃÂ</button></div>
+    <div class="modal-hdr"><h2 id="modal-title">Unidad</h2><button class="modal-close" onclick="closeModal()">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</button></div>
     <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer" id="modal-footer"></div>
   </div>
@@ -207,7 +207,7 @@ function logout(){sessionStorage.removeItem('hoa');document.getElementById('app'
 (function(){const s=sessionStorage.getItem('hoa');if(s){try{const u=JSON.parse(s);currentRole=u.role;document.getElementById('login-page').style.display='none';document.getElementById('app').style.display='flex';document.getElementById('role-tag').textContent=u.role;loadData();}catch(e){}}})();
 
 async function loadData(){
-  document.getElementById('map-container').innerHTML='<div class="loading">ÃÂ¢ÃÂÃÂ³ Cargando datos...</div>';
+  document.getElementById('map-container').innerHTML='<div class="loading">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ³ Cargando datos...</div>';
   const{data}=await sb.from('properties').select('*');
   PROP_DEFS.forEach(d=>{DB[d.id]=empty(d.id,d.lbl);});
   if(data)data.forEach(r=>{if(DB[r.id])DB[r.id]={...DB[r.id],...r};else DB[r.id]=r;});
@@ -215,8 +215,8 @@ async function loadData(){
 }
 async function saveProp(p){
   const{error}=await sb.from('properties').upsert({...p,updated_at:new Date().toISOString()},{onConflict:'id'});
-  if(!error){DB[p.id]=p;renderAll();showToast('ÃÂ¢ÃÂÃÂ Guardado');}
-  else showToast('ÃÂ¢ÃÂÃÂ Error: '+error.message);
+  if(!error){DB[p.id]=p;renderAll();showToast('ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Guardado');}
+  else showToast('ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Error: '+error.message);
 }
 function allProps(){return Object.values(DB).sort((a,b)=>a.unit.localeCompare(b.unit,undefined,{numeric:true}));}
 function filteredProps(q){
@@ -240,153 +240,143 @@ function renderSidebar(){
 }
 
 function renderMap(){
-  // Dimensions matching Excel proportions exactly
-  var UW=68, UH=32, G=2;      // unit: 68 wide, 32 tall, 2px gap
-  var TW=24, TH=68;            // townhouse: 24 wide, 68 tall (rotated text)
-  var SVW=22, SVH=20;          // street: 22 wide (vert), 20 tall (horiz)
-  var GRPG=6;                  // gap between TH groups
+  // ALL units same size. Townhouse cells same height, narrower width.
+  var UW=68, UH=34, G=3;   // standard unit: 68w x 34h, 3px gap
+  var TW=34, TH=68;         // townhouse cell: 34w x 68h (2 rows tall), rotated label
+  var SVW=30, SVH=28;       // street widths
 
-  // X layout (left to right):
-  var x0 = 8;
-  var xLC = x0;                // Left Col x
-  var xS1 = xLC+UW+G;         // NW 116TH CT street x
-  var xIL = xS1+SVW+G;        // Inner block Left col x
-  var xIR = xIL+UW+G;         // Inner block Right col x
-  var xS2 = xIR+UW+G;         // NW 116TH AVE street x
-  var xCC = xS2+SVW+G;        // Center Col x
-  var xLK = xCC+UW+G;         // Lake start x
-  // Lake width chosen so right side fits properly
-  // Right side: NW114CT(22) + RLC(68) + RRC(68) + 114AVE(22) = 182px
-  // Add gaps: 3*2 = 6px -> total right block = 188px
-  var xS3 = xLK+490;          // NW 114TH CT street x
-  var xRL = xS3+SVW+G;        // Right Left col x
-  var xRR = xRL+UW+G;         // Right Right col x
-  var xS4 = xRR+UW+G;         // 114TH AVE street x
-  var W   = xS4+SVW+8;        // Total SVG width
+  // X positions
+  var xLC = 10;
+  var xS1 = xLC+UW+G;           // NW 116TH CT
+  var xIL = xS1+SVW+G;          // Inner Left col
+  var xIR = xIL+UW+G;           // Inner Right col
+  var xS2 = xIR+UW+G;           // NW 116TH AVE
+  var xCC = xS2+SVW+G;          // Center col
+  var xLK = xCC+UW+G;           // Lake
+  var xS3 = xLK+500;            // NW 114TH CT
+  var xRL = xS3+SVW+G;          // Right Left col
+  var xRR = xRL+UW+G;           // Right Right col
+  var xS4 = xRR+UW+G;           // 114TH AVE
+  var W   = xS4+SVW+10;
 
-  // Y layout (top to bottom):
-  var y0 = 8;
-  var yTH = y0;                // Top TH row starts here
-  var yS48LN = yTH+TH+G;      // NW 48TH LN street y
-  var yU = yS48LN+SVH+G;      // Main units start y
-  var yS48TR = yU+8*(UH+G);   // NW 48TH TERR street y
-  var yBTH = yS48TR+SVH+G;    // Bottom TH row y
-  var H = yBTH+TH+18;         // Total SVG height
+  // Y positions
+  // Top townhouses (11637-11601) are TH=68 tall, same as 2 units
+  // NW 48TH LN street is BELOW them
+  var yTH   = 10;                 // top townhouses Y
+  var yS48LN = yTH+TH+G;         // NW 48TH LN street Y (BELOW townhouses)
+  var yU    = yS48LN+SVH+G;      // Main units start
+  var yS48TR = yU+8*(UH+G);      // NW 48TH TERR
+  var yBTH  = yS48TR+SVH+G;      // Bottom townhouses
+  var H     = yBTH+TH+24;
 
-  var lakeH = yS48TR-yU-G;    // Lake height
-  var yLBOT = yU+6*(UH+G)+10; // Left col bottom group start (after gap)
+  var lakeH = yS48TR-yU-G;
+  var yLbot = yU+6*(UH+G)+12;    // Left col bottom group start
 
   function box(id,x,y,w,h,vert){
     var p=DB[id]||{}, sel=selectedId===id;
     var fill=sel?"#90cdf4":(hasData(p)?"#c8f0d4":"#fff");
-    var stk=sel?"#2b6cb0":"#777", sw=sel?2:1;
+    var stk=sel?"#2b6cb0":"#888", sw=sel?2.5:1;
     var def=PROP_DEFS.find(function(d){return d.id===id;}), lbl=def?def.lbl:id;
-    var cx=x+w/2, cy=y+h/2, fs=vert?7:(w>55?10:9);
+    var cx=x+w/2, cy=y+h/2;
+    var fs=vert?9:11;
     var t=vert
       ?'<text x="'+cx+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-size="'+fs+'" font-weight="700" fill="#333" transform="rotate(-90 '+cx+' '+cy+')">'+lbl+'</text>'
       :'<text x="'+cx+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-size="'+fs+'" font-weight="700" fill="#333">'+lbl+'</text>';
     return '<g style="cursor:pointer" onclick="selectProp(\''+id+'\')"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+fill+'" stroke="'+stk+'" stroke-width="'+sw+'" rx="2"/>'+t+'</g>';
   }
   function sl(x,y,t,rot,fs,col){
-    fs=fs||8; col=col||"#fff";
+    fs=fs||9; col=col||"#fff";
     return rot
       ?'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="'+col+'" font-family="Arial" transform="rotate(-90 '+x+' '+y+')">'+t+'</text>'
       :'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="'+col+'" font-family="Arial">'+t+'</text>';
   }
 
-  var s='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="display:block;min-width:'+W+'px">';
-  s+='<rect width="'+W+'" height="'+H+'" fill="#5a9e5a"/>'; // grass
+  var s='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="display:block">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#5a9e5a"/>';
 
-  // STREETS
-  s+='<rect x="'+xS1+'" y="'+y0+'" width="'+SVW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>'; // NW 116TH CT
-  s+='<rect x="'+xIL+'" y="'+yS48LN+'" width="'+(xS2-xIL)+'" height="'+SVH+'" fill="#e8a020"/>'; // NW 48TH LN
-  s+='<rect x="'+xS2+'" y="'+y0+'" width="'+SVW+'" height="'+(yS48TR-y0+SVH)+'" fill="#e8a020"/>'; // NW 116TH AVE
+  // Streets
+  s+='<rect x="'+xS1+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>';   // NW 116TH CT full
+  s+='<rect x="'+xIL+'" y="'+yS48LN+'" width="'+(xS2-xIL)+'" height="'+SVH+'" fill="#e8a020"/>'; // NW 48TH LN (below TH)
+  s+='<rect x="'+xS2+'" y="'+yTH+'" width="'+SVW+'" height="'+(yS48TR-yTH+SVH)+'" fill="#e8a020"/>'; // NW 116TH AVE
   s+='<rect x="'+xCC+'" y="'+yS48TR+'" width="'+(xS3-xCC)+'" height="'+SVH+'" fill="#e8a020"/>'; // NW 48TH TERR
-  s+='<rect x="'+xS3+'" y="'+y0+'" width="'+SVW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>'; // NW 114TH CT
-  s+='<rect x="'+xS4+'" y="'+y0+'" width="'+SVW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>'; // 114TH AVE
+  s+='<rect x="'+xS3+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>';   // NW 114TH CT full
+  s+='<rect x="'+xS4+'" y="'+yTH+'" width="'+SVW+'" height="'+(H-yTH-8)+'" fill="#e8a020"/>';   // 114TH AVE full
 
-  // LAKE
-  s+='<rect x="'+xLK+'" y="'+yU+'" width="'+(xS3-xLK)+'" height="'+lakeH+'" fill="#b8ddf5" rx="3"/>';
-  s+='<text x="'+(xLK+(xS3-xLK)/2)+'" y="'+(yU+lakeH/2+8)+'" text-anchor="middle" font-size="20" font-weight="700" fill="#2c6e9e" font-family="Arial">Lake</text>';
+  // Lake
+  s+='<rect x="'+xLK+'" y="'+yU+'" width="'+(xS3-xLK)+'" height="'+lakeH+'" fill="#b8ddf5" rx="4"/>';
+  s+='<text x="'+(xLK+(xS3-xLK)/2)+'" y="'+(yU+lakeH/2+8)+'" text-anchor="middle" font-size="22" font-weight="700" fill="#2c6e9e" font-family="Arial">Lake</text>';
 
-  // STREET LABELS
-  s+=sl(xS1+SVW/2, yU+70, "NW 116TH CT", true, 8);
-  s+=sl(xS1+SVW/2, yU+210, "NW 116TH CT", true, 8);
-  s+=sl(xIL+(xS2-xIL)/2, yS48LN+SVH/2+3, "NW 48TH LN", false, 8, "#333");
-  s+=sl(xS2+SVW/2, yU+90, "NW 116TH AVE", true, 8);
-  s+=sl(xCC+(xS3-xCC)/2, yS48TR+SVH/2+3, "NW 48TH TERR", false, 10);
-  s+=sl(xS3+SVW/2, yU+80, "NW 114TH CT", true, 8);
-  s+=sl(xS4+SVW/2, yU+80, "114TH AVE", true, 8);
+  // Street labels
+  s+=sl(xS1+SVW/2, yU+90,  "NW 116TH CT",  true,  8);
+  s+=sl(xS1+SVW/2, yU+240, "NW 116TH CT",  true,  8);
+  s+=sl(xIL+(xS2-xIL)/2, yS48LN+SVH/2+4, "NW 48TH LN", false, 9, "#333");
+  s+=sl(xS2+SVW/2, yU+100, "NW 116TH AVE", true,  8);
+  s+=sl(xCC+(xS3-xCC)/2, yS48TR+SVH/2+4, "NW 48TH TERR", false, 11);
+  s+=sl(xS3+SVW/2, yU+90,  "NW 114TH CT",  true,  8);
+  s+=sl(xS4+SVW/2, yU+90,  "114TH AVE",    true,  8);
 
-  // LEFT COL top 6 then gap then bottom 7
+  // LEFT COL: top 6, gap, bottom 7
   ["4896","4888","4880","4872a","4864","4856"].forEach(function(id,i){s+=box(id,xLC,yU+i*(UH+G),UW,UH);});
-  ["4848","4840a","4832","4824","4816","4808","4800"].forEach(function(id,i){s+=box(id,xLC,yLBOT+i*(UH+G),UW,UH);});
+  ["4848","4840a","4832","4824","4816","4808","4800"].forEach(function(id,i){s+=box(id,xLC,yLbot+i*(UH+G),UW,UH);});
 
-  // TOP TOWNHOUSES inside NW48LN area (7 units above inner block)
+  // TOP TOWNHOUSES: 7 cells (TW=34, TH=68) above inner block, in green area
+  // They sit between xIL and xS2, height=TH, no street overlapping them
   ["th11637","th11631","th11625","th11619","th11613","th11607","th11601"].forEach(function(id,i){
-    s+=box(id,xIL+i*(TW+G),yTH,TW,TH,true);
+    s+=box(id, xIL+i*(TW+G), yTH, TW, TH, true);
   });
 
-  // INNER BLOCK 7 rows x 2 cols
+  // INNER BLOCK: 7 rows × 2 cols
   ["4857","4849","4841","4833a","4825","4817","4809"].forEach(function(id,i){s+=box(id,xIL,yU+i*(UH+G),UW,UH);});
   ["4850","4842","4834a","4826","4818","4810","4802"].forEach(function(id,i){s+=box(id,xIR,yU+i*(UH+G),UW,UH);});
 
-  // CENTER COL 8 units
+  // CENTER COL: 8 units
   ["4895","4887","4879","4871a","4863","4855","4847","4839"].forEach(function(id,i){s+=box(id,xCC,yU+i*(UH+G),UW,UH);});
 
-  // RIGHT TOP (above NW48TERR line)
+  // RIGHT TOP: left col 5, right col 4 (above NW48TERR)
   ["4878","4872b","4866","4860","4854"].forEach(function(id,i){s+=box(id,xRL,yU+i*(UH+G),UW,UH);});
   ["4877","4871b","4865","4859"].forEach(function(id,i){s+=box(id,xRR,yU+i*(UH+G),UW,UH);});
 
-  // RIGHT BOTTOM (below NW48TERR line, starts at yBTH to not overlap bottom TH)
-  // These sit ABOVE the bottom TH row in Y, between yS48TR+SVH and yBTH
-  // Wait - in Excel right bottom units ARE at same Y as bottom TH but to the right of NW114CT
-  // They appear below NW48TERR and above bottom TH row
-  // Actually in Excel: right bottom units are between NW48TERR and the bottom TH
-  var yRB = yS48TR+SVH+G; // right bottom units start just below NW48TERR
+  // RIGHT BOTTOM: left col 6, right col 5 (below NW48TERR)
+  var yRB = yS48TR+SVH+G;
   ["4840b","4834b","4828","4822","4814","4806"].forEach(function(id,i){s+=box(id,xRL,yRB+i*(UH+G),UW,UH);});
   ["4833b","4827","4821","4813","4805"].forEach(function(id,i){s+=box(id,xRR,yRB+i*(UH+G),UW,UH);});
 
-  // BOTTOM TOWNHOUSES - span from xCC to just before xS3 (NW114CT)
-  // 4 groups: g1(7)+g2(6)+g3(6)+g4(7) = 26 units
-  // Available width: xS3-xCC = 490+UW+G = 490+70 = 560px (but xLK=xCC+UW+G so xS3-xCC=xLK-xCC+xS3-xLK = UW+G+490 = 562)
-  // Actually xS3-xCC = xS3-xCC. Let's compute: xS3=xLK+490, xLK=xCC+UW+G
-  // So xS3-xCC = UW+G+490 = 70+2+490 = 562px
-  // 26 units: 26*TW + 25*G + 3*GRPG = 26*24+25*2+3*6 = 624+50+18 = 692 > 562 -- too wide!
-  // Solution: use smaller TW=20 for bottom TH
-  var BTW=20, BTH=65;
-  // 26*20+25*2+3*6 = 520+50+18 = 588 > 562 still too wide
-  // Try BTW=18: 26*18+25*2+3*6 = 468+50+18 = 536 <= 562 YES!
-  BTW=18; 
+  // BOTTOM TOWNHOUSES: 4 groups, each cell TW=34 TH=68
+  // Total: 7+6+6+7=26 cells × (34+3)=37px + 3gaps×8px = 962+24=986px
+  // Available from xCC to xS3 = 500+UW+G = 572px — NOT enough for 34px wide
+  // Use TW=18: 26×18+25×3+3×8=468+75+24=567 <= 572 YES
+  var BTW=18, BTH=68, BG=3, BGRP=8;
   var g1=["th11572","th11566","th11565","th11548","th11542","th11536","th11530"];
   var g2=["th11524","th11518","th11512","th11506","th11500","th11494"];
   var g3=["th11498","th11492","th11486","th11480","th11474","th11468"];
   var g4=["th11462","th11456","th11450","th11444","th11438","th11432","th11426"];
   var bx=xCC;
-  g1.forEach(function(id,i){s+=box(id,bx+i*(BTW+G),yBTH,BTW,BTH,true);}); bx+=g1.length*(BTW+G)+GRPG;
-  g2.forEach(function(id,i){s+=box(id,bx+i*(BTW+G),yBTH,BTW,BTH,true);}); bx+=g2.length*(BTW+G)+GRPG;
-  g3.forEach(function(id,i){s+=box(id,bx+i*(BTW+G),yBTH,BTW,BTH,true);}); bx+=g3.length*(BTW+G)+GRPG;
-  g4.forEach(function(id,i){s+=box(id,bx+i*(BTW+G),yBTH,BTW,BTH,true);});
+  g1.forEach(function(id,i){s+=box(id,bx+i*(BTW+BG),yBTH,BTW,BTH,true);}); bx+=g1.length*(BTW+BG)+BGRP;
+  g2.forEach(function(id,i){s+=box(id,bx+i*(BTW+BG),yBTH,BTW,BTH,true);}); bx+=g2.length*(BTW+BG)+BGRP;
+  g3.forEach(function(id,i){s+=box(id,bx+i*(BTW+BG),yBTH,BTW,BTH,true);}); bx+=g3.length*(BTW+BG)+BGRP;
+  g4.forEach(function(id,i){s+=box(id,bx+i*(BTW+BG),yBTH,BTW,BTH,true);});
 
   // LEGEND
-  var ly=H-14;
-  s+='<rect x="'+xLC+'" y="'+ly+'" width="10" height="10" fill="#fff" stroke="#777" rx="1"/>';
-  s+='<text x="'+(xLC+13)+'" y="'+(ly+8)+'" font-size="10" fill="#fff">Sin datos</text>';
-  s+='<rect x="'+(xLC+88)+'" y="'+ly+'" width="10" height="10" fill="#c8f0d4" stroke="#777" rx="1"/>';
-  s+='<text x="'+(xLC+101)+'" y="'+(ly+8)+'" font-size="10" fill="#fff">Con datos</text>';
-  s+='<rect x="'+(xLC+186)+'" y="'+ly+'" width="10" height="10" fill="#90cdf4" stroke="#2b6cb0" stroke-width="2" rx="1"/>';
-  s+='<text x="'+(xLC+199)+'" y="'+(ly+8)+'" font-size="10" fill="#fff">Seleccionado</text>';
+  var ly=H-16;
+  s+='<rect x="10" y="'+ly+'" width="12" height="12" fill="#fff" stroke="#888" rx="2"/>';
+  s+='<text x="26" y="'+(ly+10)+'" font-size="11" fill="#fff">Sin datos</text>';
+  s+='<rect x="110" y="'+ly+'" width="12" height="12" fill="#c8f0d4" stroke="#888" rx="2"/>';
+  s+='<text x="126" y="'+(ly+10)+'" font-size="11" fill="#fff">Con datos</text>';
+  s+='<rect x="220" y="'+ly+'" width="12" height="12" fill="#90cdf4" stroke="#2b6cb0" stroke-width="2" rx="2"/>';
+  s+='<text x="236" y="'+(ly+10)+'" font-size="11" fill="#fff">Seleccionado</text>';
   s+="</svg>";
   document.getElementById("map-container").innerHTML=s;
+  // Also fix the map-wrap to allow horizontal scroll
+  document.querySelector(".map-wrap").style.overflowX="auto";
 }
 function renderList(){
   document.getElementById('list-body').innerHTML=filteredProps(document.getElementById('sb-search').value).map(p=>`
     <tr onclick="selectProp('${p.id}');switchView('map')">
       <td><span class="badge badge-blue">${p.unit}</span></td>
-      <td>${p.homeowner1||'ÃÂ¢ÃÂÃÂ'}</td><td>${p.homeowner2||'ÃÂ¢ÃÂÃÂ'}</td>
-      <td>${p.tenant1_name||'ÃÂ¢ÃÂÃÂ'}</td>
+      <td>${p.homeowner1||'ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ'}</td><td>${p.homeowner2||'ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ'}</td>
+      <td>${p.tenant1_name||'ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ'}</td>
       <td>${[1,2,3,4,5,6,7,8].filter(n=>p['kf'+n]).map(n=>`<span class="badge badge-green">${p['kf'+n]}</span>`).join(' ')}</td>
-      <td>${p.pet1_name?'ÃÂ°ÃÂÃÂÃÂ¾ '+p.pet1_name:''}</td>
+      <td>${p.pet1_name?'ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¾ '+p.pet1_name:''}</td>
     </tr>`).join('');
 }
 
@@ -396,12 +386,12 @@ function renderSearch(){
   el.innerHTML=filteredProps(q).map(p=>`
     <div class="card" onclick="selectProp('${p.id}');switchView('map')">
       <div style="display:flex;gap:6px;margin-bottom:5px;align-items:center">
-        <span class="badge badge-blue">${p.unit}</span>${hasData(p)?'<span class="badge badge-green">ÃÂ¢ÃÂÃÂ</span>':''}
+        <span class="badge badge-blue">${p.unit}</span>${hasData(p)?'<span class="badge badge-green">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</span>':''}
       </div>
       <div style="font-size:13px;font-weight:500">${p.homeowner1||'<span style="color:#a0aec0;font-size:12px">Sin datos</span>'}</div>
       ${p.tenant1_name?`<div style="font-size:12px;color:#718096">T: ${p.tenant1_name}</div>`:''}
-      ${p.kf1?`<div style="font-size:12px;color:#718096">ÃÂ°ÃÂÃÂÃÂ ${p.kf1}</div>`:''}
-      ${p.pet1_name?`<div style="font-size:12px;color:#718096">ÃÂ°ÃÂÃÂÃÂ¾ ${p.pet1_name}</div>`:''}
+      ${p.kf1?`<div style="font-size:12px;color:#718096">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ ${p.kf1}</div>`:''}
+      ${p.pet1_name?`<div style="font-size:12px;color:#718096">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¾ ${p.pet1_name}</div>`:''}
     </div>`).join('');
 }
 
@@ -409,9 +399,9 @@ function renderIE(){
   const t=Object.keys(DB).length,d=Object.values(DB).filter(hasData).length;
   const ro=currentRole==='viewer';
   document.getElementById('ie-content').innerHTML=ro?'<p style="color:#718096;padding:16px">Necesitas acceso admin.</p>':`
-    <div class="ie-card"><h3>ÃÂ°ÃÂÃÂÃÂ¤ Exportar a CSV</h3><p>Descarga todos los datos en Excel/Numbers.</p><button class="btn btn-primary" onclick="exportCSV()">Descargar CSV</button></div>
-    <div class="ie-card"><h3>ÃÂ°ÃÂÃÂÃÂ¥ Importar desde CSV</h3><p>Columnas requeridas: id, unit, homeowner1, homeowner2, tenant1_name, tenant1_phone, tenant1_email, tenant2_name, tenant2_phone, tenant2_email, occ1_name, occ1_phone, occ1_email, occ2_name, occ2_phone, occ2_email, kf1ÃÂ¢ÃÂÃÂ¦kf8, pet1_name, pet1_breed, pet1_gender, pet2_name, pet2_breed, pet2_gender, notes</p><input type="file" accept=".csv" onchange="importCSV(event)"/></div>
-    <div class="ie-card"><h3>ÃÂ°ÃÂÃÂÃÂ EstadÃÂÃÂ­sticas</h3><div class="stat-grid">
+    <div class="ie-card"><h3>ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¤ Exportar a CSV</h3><p>Descarga todos los datos en Excel/Numbers.</p><button class="btn btn-primary" onclick="exportCSV()">Descargar CSV</button></div>
+    <div class="ie-card"><h3>ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¥ Importar desde CSV</h3><p>Columnas requeridas: id, unit, homeowner1, homeowner2, tenant1_name, tenant1_phone, tenant1_email, tenant2_name, tenant2_phone, tenant2_email, occ1_name, occ1_phone, occ1_email, occ2_name, occ2_phone, occ2_email, kf1ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¦kf8, pet1_name, pet1_breed, pet1_gender, pet2_name, pet2_breed, pet2_gender, notes</p><input type="file" accept=".csv" onchange="importCSV(event)"/></div>
+    <div class="ie-card"><h3>ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ EstadÃÂÃÂÃÂÃÂ­sticas</h3><div class="stat-grid">
       <div class="stat"><div class="stat-n">${t}</div><div class="stat-l">Total</div></div>
       <div class="stat"><div class="stat-n">${d}</div><div class="stat-l">Con datos</div></div>
       <div class="stat"><div class="stat-n">${t-d}</div><div class="stat-l">Sin datos</div></div>
@@ -438,28 +428,28 @@ function closeModal(){document.getElementById('overlay').classList.remove('open'
 function fld(label,key,p,type='text'){
   const val=(p[key]||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const disp=(p[key]||'');
-  if(type==='select')return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂ¢ÃÂÃÂ'}</div><select name="${key}"><option value="">ÃÂ¢ÃÂÃÂ</option><option${disp==='Male'?' selected':''}>Male</option><option${disp==='Female'?' selected':''}>Female</option></select></div>`;
-  if(type==='textarea')return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂ¢ÃÂÃÂ'}</div><textarea name="${key}" rows="3">${disp}</textarea></div>`;
-  return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂ¢ÃÂÃÂ'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
+  if(type==='select')return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ'}</div><select name="${key}"><option value="">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ</option><option${disp==='Male'?' selected':''}>Male</option><option${disp==='Female'?' selected':''}>Female</option></select></div>`;
+  if(type==='textarea')return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ'}</div><textarea name="${key}" rows="3">${disp}</textarea></div>`;
+  return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
 }
 function fldFull(label,key,p,type='text'){
   const val=(p[key]||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const disp=(p[key]||'');
-  return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂ¢ÃÂÃÂ'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
+  return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
 }
 
 function renderModalBody(p,editing){
   const ro=currentRole==='viewer';const cls=editing&&!ro?'editing':'';
   document.getElementById('modal-body').innerHTML=`<div class="${cls}" id="fw">
-  <div class="sec"><div class="sec-title">Propiedad</div><div class="sec-body cols1">${fld('DirecciÃÂÃÂ³n','address',p)}</div></div>
+  <div class="sec"><div class="sec-title">Propiedad</div><div class="sec-body cols1">${fld('DirecciÃÂÃÂÃÂÃÂ³n','address',p)}</div></div>
   <div class="sec"><div class="sec-title">Homeowners</div><div class="sec-body">${fld('Homeowner 1','homeowner1',p)}${fld('Homeowner 2','homeowner2',p)}</div></div>
-  <div class="sec"><div class="sec-title">Tenant 1</div><div class="sec-body">${fld('Nombre','tenant1_name',p)}${fld('TelÃÂÃÂ©fono','tenant1_phone',p)}${fldFull('Email','tenant1_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Tenant 2</div><div class="sec-body">${fld('Nombre','tenant2_name',p)}${fld('TelÃÂÃÂ©fono','tenant2_phone',p)}${fldFull('Email','tenant2_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Occupant Adicional 1</div><div class="sec-body">${fld('Nombre','occ1_name',p)}${fld('TelÃÂÃÂ©fono','occ1_phone',p)}${fldFull('Email','occ1_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Occupant Adicional 2</div><div class="sec-body">${fld('Nombre','occ2_name',p)}${fld('TelÃÂÃÂ©fono','occ2_phone',p)}${fldFull('Email','occ2_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Tenant 1</div><div class="sec-body">${fld('Nombre','tenant1_name',p)}${fld('TelÃÂÃÂÃÂÃÂ©fono','tenant1_phone',p)}${fldFull('Email','tenant1_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Tenant 2</div><div class="sec-body">${fld('Nombre','tenant2_name',p)}${fld('TelÃÂÃÂÃÂÃÂ©fono','tenant2_phone',p)}${fldFull('Email','tenant2_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Occupant Adicional 1</div><div class="sec-body">${fld('Nombre','occ1_name',p)}${fld('TelÃÂÃÂÃÂÃÂ©fono','occ1_phone',p)}${fldFull('Email','occ1_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Occupant Adicional 2</div><div class="sec-body">${fld('Nombre','occ2_name',p)}${fld('TelÃÂÃÂÃÂÃÂ©fono','occ2_phone',p)}${fldFull('Email','occ2_email',p,'email')}</div></div>
   <div class="sec"><div class="sec-title">Keyfobs</div><div class="sec-body cols4">${[1,2,3,4,5,6,7,8].map(n=>fld('Keyfob '+n,'kf'+n,p)).join('')}</div></div>
-  <div class="sec"><div class="sec-title">Mascota 1</div><div class="sec-body">${fld('Nombre','pet1_name',p)}${fld('Raza','pet1_breed',p)}${fld('GÃÂÃÂ©nero','pet1_gender',p,'select')}</div></div>
-  <div class="sec"><div class="sec-title">Mascota 2</div><div class="sec-body">${fld('Nombre','pet2_name',p)}${fld('Raza','pet2_breed',p)}${fld('GÃÂÃÂ©nero','pet2_gender',p,'select')}</div></div>
+  <div class="sec"><div class="sec-title">Mascota 1</div><div class="sec-body">${fld('Nombre','pet1_name',p)}${fld('Raza','pet1_breed',p)}${fld('GÃÂÃÂÃÂÃÂ©nero','pet1_gender',p,'select')}</div></div>
+  <div class="sec"><div class="sec-title">Mascota 2</div><div class="sec-body">${fld('Nombre','pet2_name',p)}${fld('Raza','pet2_breed',p)}${fld('GÃÂÃÂÃÂÃÂ©nero','pet2_gender',p,'select')}</div></div>
   <div class="sec"><div class="sec-title">Notas</div><div class="sec-body cols1">${fld('Notas','notes',p,'textarea')}</div></div>
   </div>`;
 }
@@ -468,10 +458,10 @@ function renderModalFooter(p,editing){
   const ro=currentRole==='viewer';
   document.getElementById('modal-footer').innerHTML=
     ro?`<button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`:
-    editing?`<button class="btn btn-success" onclick="saveModal('${p.id}')">ÃÂ°ÃÂÃÂÃÂ¾ Guardar</button>
+    editing?`<button class="btn btn-success" onclick="saveModal('${p.id}')">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¾ Guardar</button>
               <button class="btn btn-secondary" onclick="openModal('${p.id}')">Cancelar</button>
               <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`:
-             `<button class="btn btn-primary" onclick="editModal('${p.id}')">ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ Editar</button>
+             `<button class="btn btn-primary" onclick="editModal('${p.id}')">ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¸ÃÂÃÂ Editar</button>
               <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`;
 }
 function editModal(id){const p=DB[id]||{};renderModalBody(p,true);renderModalFooter(p,true);}
@@ -479,7 +469,7 @@ async function saveModal(id){
   const p=DB[id]||{};const fw=document.getElementById('fw');const updated={...p};
   fw.querySelectorAll('input,select').forEach(el=>{if(el.name)updated[el.name]=el.value;});
   fw.querySelectorAll('textarea').forEach(el=>{if(el.name)updated[el.name]=el.value;});
-  document.getElementById('modal-footer').innerHTML='<span style="color:#718096;font-size:13px">ÃÂ°ÃÂÃÂÃÂ¾ Guardando...</span>';
+  document.getElementById('modal-footer').innerHTML='<span style="color:#718096;font-size:13px">ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¾ Guardando...</span>';
   await saveProp(updated);openModal(id);
 }
 
@@ -487,7 +477,7 @@ function exportCSV(){
   const cols=['id','unit','address','homeowner1','homeowner2','tenant1_name','tenant1_phone','tenant1_email','tenant2_name','tenant2_phone','tenant2_email','occ1_name','occ1_phone','occ1_email','occ2_name','occ2_phone','occ2_email','kf1','kf2','kf3','kf4','kf5','kf6','kf7','kf8','pet1_name','pet1_breed','pet1_gender','pet2_name','pet2_breed','pet2_gender','notes'];
   const csv=[cols.join(','),...allProps().map(p=>cols.map(c=>`"${(p[c]||'').toString().replace(/"/g,'""')}"`).join(','))].join('\n');
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='dimensions_doral_hoa.csv';a.click();
-  showToast('ÃÂ°ÃÂÃÂÃÂ¥ CSV exportado');
+  showToast('ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¥ CSV exportado');
 }
 async function importCSV(e){
   const file=e.target.files[0];if(!file)return;
@@ -503,9 +493,9 @@ async function importCSV(e){
         const obj={};headers.forEach((h,i)=>{obj[h]=(vals[i]||'').replace(/^"|"$/g,'');});return obj;
       }).filter(r=>r.id||r.unit);
       const{error}=await sb.from('properties').upsert(rows,{onConflict:'id'});
-      if(!error){await loadData();showToast('ÃÂ¢ÃÂÃÂ Importado: '+rows.length+' registros');}
-      else showToast('ÃÂ¢ÃÂÃÂ Error: '+error.message);
-    }catch(err){showToast('ÃÂ¢ÃÂÃÂ Error: '+err.message);}
+      if(!error){await loadData();showToast('ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Importado: '+rows.length+' registros');}
+      else showToast('ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Error: '+error.message);
+    }catch(err){showToast('ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Error: '+err.message);}
   };
   reader.readAsText(file,'UTF-8');e.target.value='';
 }
