@@ -91,30 +91,30 @@ table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
 @media(max-width:600px){.sidebar{display:none}.topbar h1{font-size:13px}.nav-btn{font-size:11px;padding:4px 6px}.sec-body.cols4{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-<body style="background:#f0f4f8"><div id="preload" style="display:none;align-items:center;justify-content:center;height:100vh;font-family:system-ui;color:#1e3a5f;font-size:18px;font-weight:600">🏠 Cargando Dimensions at Doral...</div>
+<body style="background:#f0f4f8"><div id="preload" style="display:none;align-items:center;justify-content:center;height:100vh;font-family:system-ui;color:#1e3a5f;font-size:18px;font-weight:600">ð  Cargando Dimensions at Doral...</div>
 <div id="login-page" style="display:flex;align-items:center;justify-content:center;height:100vh;background:#f0f4f8">
   <div class="login-box">
-    <h1>🏠 Dimensions at Doral</h1>
+    <h1>ð  Dimensions at Doral</h1>
     <p>HOA Property Management</p>
-    <div id="login-err" class="login-err">Usuario o contraseña incorrectos</div>
+    <div id="login-err" class="login-err">Usuario o contraseÃ±a incorrectos</div>
     <div class="lf"><label>Usuario</label><input id="lu" placeholder="admin o viewer" autocomplete="username"/></div>
-    <div class="lf"><label>Contraseña</label><input id="lp" type="password" autocomplete="current-password"/></div>
+    <div class="lf"><label>ContraseÃ±a</label><input id="lp" type="password" autocomplete="current-password"/></div>
     <button class="login-btn" onclick="doLogin()">Entrar</button>
-    <div style="margin-top:12px;font-size:11px;color:#a0aec0;text-align:center">Admin: admin / doral2024 &nbsp;·&nbsp; Viewer: viewer / view2024</div>
+    <div style="margin-top:12px;font-size:11px;color:#a0aec0;text-align:center">Admin: admin / doral2024 &nbsp;Â·&nbsp; Viewer: viewer / view2024</div>
   </div>
 </div>
 
 <div id="app" style="display:none;flex-direction:column;height:100vh;overflow:hidden">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:8px">
-      <span>🏠</span><h1>Dimensions at Doral HOA</h1>
+      <span>ð </span><h1>Dimensions at Doral HOA</h1>
       <span id="role-tag" class="role-tag">admin</span>
     </div>
     <div style="display:flex;gap:4px;flex-wrap:wrap">
-      <button class="nav-btn active" onclick="switchView('map')">🗺 Mapa</button>
-      <button class="nav-btn" onclick="switchView('list')">📋 Lista</button>
-      <button class="nav-btn" onclick="switchView('search')">🔍 Buscar</button>
-      <button class="nav-btn" onclick="switchView('ie')">📤 Import/Export</button>
+      <button class="nav-btn active" onclick="switchView('map')">ðº Mapa</button>
+      <button class="nav-btn" onclick="switchView('list')">ð Lista</button>
+      <button class="nav-btn" onclick="switchView('search')">ð Buscar</button>
+      <button class="nav-btn" onclick="switchView('ie')">ð¤ Import/Export</button>
       <button class="nav-btn" onclick="logout()" style="background:rgba(220,50,50,.3)">Salir</button>
     </div>
   </div>
@@ -134,7 +134,7 @@ table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
 
 <div id="overlay" class="overlay" onclick="overlayClick(event)">
   <div class="modal" id="modal">
-    <div class="modal-hdr"><h2 id="modal-title">Unidad</h2><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-hdr"><h2 id="modal-title">Unidad</h2><button class="modal-close" onclick="closeModal()">â</button></div>
     <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer" id="modal-footer"></div>
   </div>
@@ -207,7 +207,7 @@ function logout(){sessionStorage.removeItem('hoa');document.getElementById('app'
 (function(){const s=sessionStorage.getItem('hoa');if(s){try{const u=JSON.parse(s);currentRole=u.role;document.getElementById('login-page').style.display='none';document.getElementById('app').style.display='flex';document.getElementById('role-tag').textContent=u.role;loadData();}catch(e){}}})();
 
 async function loadData(){
-  document.getElementById('map-container').innerHTML='<div class="loading">⏳ Cargando datos...</div>';
+  document.getElementById('map-container').innerHTML='<div class="loading">â³ Cargando datos...</div>';
   const{data}=await sb.from('properties').select('*');
   PROP_DEFS.forEach(d=>{DB[d.id]=empty(d.id,d.lbl);});
   if(data)data.forEach(r=>{if(DB[r.id])DB[r.id]={...DB[r.id],...r};else DB[r.id]=r;});
@@ -215,8 +215,8 @@ async function loadData(){
 }
 async function saveProp(p){
   const{error}=await sb.from('properties').upsert({...p,updated_at:new Date().toISOString()},{onConflict:'id'});
-  if(!error){DB[p.id]=p;renderAll();showToast('✅ Guardado');}
-  else showToast('❌ Error: '+error.message);
+  if(!error){DB[p.id]=p;renderAll();showToast('â Guardado');}
+  else showToast('â Error: '+error.message);
 }
 function allProps(){return Object.values(DB).sort((a,b)=>a.unit.localeCompare(b.unit,undefined,{numeric:true}));}
 function filteredProps(q){
@@ -240,112 +240,85 @@ function renderSidebar(){
 }
 
 function renderMap(){
-  // EXACT layout from Excel image:
-  // Columns L→R: LEFT_COL | NW116CT | INNER_BLOCK(2col) | NW116AVE | CENTER_COL | LAKE | NW114CT | RIGHT(2col) | 114AVE
-  // Rows T→B: [TOP_TH] [NW48LN] [UNITS/LAKE] [NW48TERR] [BOT_TH]
-  const UW=70,UH=34,G=3,TW=30,TH=72,SW=26,SH=24;
-  const x0=8;
-  const xL=x0, xS1=xL+UW+G, xIL=xS1+SW+G, xIR=xIL+UW+G, xS2=xIR+UW+G;
-  const xCC=xS2+SW+G, xLK=xCC+UW+G, xS3=xLK+494, xRL=xS3+SW+G, xRR=xRL+UW+G, xS4=xRR+UW+G;
-  const W=xS4+SW+8;
-  const y0=8, yTH=y0, yS48LN=yTH+TH+G, yU=yS48LN+SH+G;
-  const yS48TR=yU+8*(UH+G), yBTH=yS48TR+SH+G, H=yBTH+TH+30;
-  const lkH=yS48TR-yU-G;
+  var UW=70,UH=34,G=3,TW=30,TH=72,SW=26,SH=24;
+  var x0=8,xL=x0,xS1=xL+UW+G,xIL=xS1+SW+G,xIR=xIL+UW+G,xS2=xIR+UW+G;
+  var xCC=xS2+SW+G,xLK=xCC+UW+G,xS3=xLK+494,xRL=xS3+SW+G,xRR=xRL+UW+G,xS4=xRR+UW+G;
+  var W=xS4+SW+8,y0=8,yTH=y0,yS48LN=yTH+TH+G,yU=yS48LN+SH+G;
+  var yS48TR=yU+8*(UH+G),yBTH=yS48TR+SH+G,H=yBTH+TH+30,lkH=yS48TR-yU-G;
 
-  function uu(id,x,y,w,h,v=false){
-    const p=DB[id],sel=selectedId===id;
-    const fill=sel?'#90cdf4':(hasData(p)?'#c8f0d4':'#fff');
-    const stk=sel?'#2b6cb0':'#888',sw2=sel?2.5:1;
-    const def=PROP_DEFS.find(d=>d.id===id),lbl=def?def.lbl:id;
-    const cx=x+w/2,cy=y+h/2,fs=v?8:(w>=60?11:9);
-    const t=v
+  function uu(id,x,y,w,h,v){
+    var p=DB[id],sel=selectedId===id;
+    var fill=sel?"#90cdf4":(hasData(p)?"#c8f0d4":"#fff");
+    var stk=sel?"#2b6cb0":"#888",sw2=sel?2.5:1;
+    var def=PROP_DEFS.find(function(d){return d.id===id;}),lbl=def?def.lbl:id;
+    var cx=x+w/2,cy=y+h/2,fs=v?8:(w>=60?11:9);
+    var t=v
       ?'<text x="'+cx+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-size="'+fs+'" font-weight="700" fill="#333" transform="rotate(-90 '+cx+' '+cy+')">'+lbl+'</text>'
       :'<text x="'+cx+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-size="'+fs+'" font-weight="700" fill="#333">'+lbl+'</text>';
-    return '<g style="cursor:pointer" onclick="selectProp(''+id+'')"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+fill+'" stroke="'+stk+'" stroke-width="'+sw2+'" rx="2"/>'+t+'</g>';
+    return '<g style="cursor:pointer" onclick="selectProp(\''+id+'\')"><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+fill+'" stroke="'+stk+'" stroke-width="'+sw2+'" rx="2"/>'+t+'</g>';
   }
-  function sl(x,y,t,rot,fs,col){fs=fs||9;col=col||'#fff';
+  function sl(x,y,t,rot,fs,col){
+    fs=fs||9;col=col||"#fff";
     return rot
       ?'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="'+col+'" transform="rotate(-90 '+x+' '+y+')">'+t+'</text>'
       :'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="'+col+'">'+t+'</text>';
   }
 
-  let s='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="display:block;min-width:'+W+'px">';
+  var s='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="display:block;min-width:'+W+'px">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#5a9e5a"/>';
-
-  // Streets
-  s+='<rect x="'+xS1+'" y="'+y0+'" width="'+SW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>'; //NW116CT
-  s+='<rect x="'+xIL+'" y="'+yS48LN+'" width="'+(xS2-xIL)+'" height="'+SH+'" fill="#e8a020"/>'; //NW48LN
-  s+='<rect x="'+xS2+'" y="'+y0+'" width="'+SW+'" height="'+(yS48TR-y0+SH)+'" fill="#e8a020"/>'; //NW116AVE
-  s+='<rect x="'+xCC+'" y="'+yS48TR+'" width="'+(xS3-xCC)+'" height="'+SH+'" fill="#e8a020"/>'; //NW48TERR
-  s+='<rect x="'+xS3+'" y="'+y0+'" width="'+SW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>'; //NW114CT
-  s+='<rect x="'+xS4+'" y="'+y0+'" width="'+SW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>'; //114AVE
-
-  // Lake
+  s+='<rect x="'+xS1+'" y="'+y0+'" width="'+SW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>';
+  s+='<rect x="'+xIL+'" y="'+yS48LN+'" width="'+(xS2-xIL)+'" height="'+SH+'" fill="#e8a020"/>';
+  s+='<rect x="'+xS2+'" y="'+y0+'" width="'+SW+'" height="'+(yS48TR-y0+SH)+'" fill="#e8a020"/>';
+  s+='<rect x="'+xCC+'" y="'+yS48TR+'" width="'+(xS3-xCC)+'" height="'+SH+'" fill="#e8a020"/>';
+  s+='<rect x="'+xS3+'" y="'+y0+'" width="'+SW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>';
+  s+='<rect x="'+xS4+'" y="'+y0+'" width="'+SW+'" height="'+(H-y0-8)+'" fill="#e8a020"/>';
   s+='<rect x="'+xLK+'" y="'+yU+'" width="'+(xS3-xLK)+'" height="'+lkH+'" fill="#b8ddf5" rx="4"/>';
-  s+='<text x="'+(xLK+(xS3-xLK)/2)+'" y="'+(yU+lkH/2+10)+'" text-anchor="middle" font-size="26" font-weight="700" fill="#2c6e9e" font-family="Arial">Lake</text>';
+  var lkCx=xLK+(xS3-xLK)/2;
+  s+='<text x="'+lkCx+'" y="'+(yU+lkH/2+10)+'" text-anchor="middle" font-size="26" font-weight="700" fill="#2c6e9e" font-family="Arial">Lake</text>';
+  s+=sl(xS1+SW/2, yU+80, "NW 116TH CT", true);
+  s+=sl(xS1+SW/2, yU+240, "NW 116TH CT", true);
+  s+=sl(xIL+(xS2-xIL)/2, yS48LN+SH/2+4, "NW 48TH LN", false);
+  s+=sl(xS2+SW/2, yU+80, "NW 116TH AVE", true);
+  s+=sl(xCC+(xS3-xCC)/2, yS48TR+SH/2+4, "NW 48TH TERR", false, 11);
+  s+=sl(xS3+SW/2, yU+100, "NW 114TH CT", true);
+  s+=sl(xS4+SW/2, yU+100, "114TH AVE", true);
 
-  // Street labels
-  s+=sl(xS1+SW/2, yU+80, 'NW 116TH CT', true);
-  s+=sl(xS1+SW/2, yU+240, 'NW 116TH CT', true);
-  s+=sl(xIL+(xS2-xIL)/2, yS48LN+SH/2+4, 'NW 48TH LN', false);
-  s+=sl(xS2+SW/2, yU+80, 'NW 116TH AVE', true);
-  s+=sl(xCC+(xS3-xCC)/2, yS48TR+SH/2+4, 'NW 48TH TERR', false, 11);
-  s+=sl(xS3+SW/2, yU+100, 'NW 114TH CT', true);
-  s+=sl(xS4+SW/2, yU+100, '114TH AVE', true);
-
-  // LEFT COLUMN: top 6 (4896-4856), gap, bottom 7 (4848-4800)
-  ['4896','4888','4880','4872a','4864','4856'].forEach((id,i)=>{s+=uu(id,xL,yU+i*(UH+G),UW,UH);});
-  const yLB=yU+6*(UH+G)+14;
-  ['4848','4840a','4832','4824','4816','4808','4800'].forEach((id,i)=>{s+=uu(id,xL,yLB+i*(UH+G),UW,UH);});
-
-  // TOP TOWNHOUSES (7 units, vertical text, above inner block)
-  ['th11637','th11631','th11625','th11619','th11613','th11607','th11601'].forEach((id,i)=>{
-    s+=uu(id,xIL+i*(TW+G),yTH,TW,TH,true);
-  });
-
-  // INNER BLOCK: 7 rows x 2 cols (left 4857-4809, right 4850-4802)
-  ['4857','4849','4841','4833a','4825','4817','4809'].forEach((id,i)=>{s+=uu(id,xIL,yU+i*(UH+G),UW,UH);});
-  ['4850','4842','4834a','4826','4818','4810','4802'].forEach((id,i)=>{s+=uu(id,xIR,yU+i*(UH+G),UW,UH);});
-
-  // CENTER COLUMN: 8 units (4895-4839)
-  ['4895','4887','4879','4871a','4863','4855','4847','4839'].forEach((id,i)=>{s+=uu(id,xCC,yU+i*(UH+G),UW,UH);});
-
-  // BOTTOM TOWNHOUSES: 4 groups below NW 48TH TERR
-  const g1=['th11572','th11566','th11565','th11548','th11542','th11536','th11530'];
-  const g2=['th11524','th11518','th11512','th11506','th11500','th11494'];
-  const g3=['th11498','th11492','th11486','th11480','th11474','th11468'];
-  const g4=['th11462','th11456','th11450','th11444','th11438','th11432','th11426'];
-  let bx=xCC;
-  g1.forEach((id,i)=>{s+=uu(id,bx+i*(TW+G),yBTH,TW,TH,true);}); bx+=g1.length*(TW+G)+8;
-  g2.forEach((id,i)=>{s+=uu(id,bx+i*(TW+G),yBTH,TW,TH,true);}); bx+=g2.length*(TW+G)+8;
-  g3.forEach((id,i)=>{s+=uu(id,bx+i*(TW+G),yBTH,TW,TH,true);}); bx+=g3.length*(TW+G)+8;
-  g4.forEach((id,i)=>{s+=uu(id,bx+i*(TW+G),yBTH,TW,TH,true);});
-
-  // RIGHT TOP: left col 5 (4878,4872,4866,4860,4854) + right col 4 (4877,4871,4865,4859)
-  ['4878','4872b','4866','4860','4854'].forEach((id,i)=>{s+=uu(id,xRL,yU+i*(UH+G),UW,UH);});
-  ['4877','4871b','4865','4859'].forEach((id,i)=>{s+=uu(id,xRR,yU+i*(UH+G),UW,UH);});
-
-  // RIGHT MID: below lake - left col 6 (4840,4834,4828,4822,4814,4806) + right col 5 (4833,4827,4821,4813,4805)
-  const yRM=yU+lkH+G;
-  ['4840b','4834b','4828','4822','4814','4806'].forEach((id,i)=>{s+=uu(id,xRL,yRM+i*(UH+G),UW,UH);});
-  ['4833b','4827','4821','4813','4805'].forEach((id,i)=>{s+=uu(id,xRR,yRM+i*(UH+G),UW,UH);});
-
-  // Legend
-  const ly=H-22;
+  ["4896","4888","4880","4872a","4864","4856"].forEach(function(id,i){s+=uu(id,xL,yU+i*(UH+G),UW,UH);});
+  var yLB=yU+6*(UH+G)+14;
+  ["4848","4840a","4832","4824","4816","4808","4800"].forEach(function(id,i){s+=uu(id,xL,yLB+i*(UH+G),UW,UH);});
+  ["th11637","th11631","th11625","th11619","th11613","th11607","th11601"].forEach(function(id,i){s+=uu(id,xIL+i*(TW+G),yTH,TW,TH,true);});
+  ["4857","4849","4841","4833a","4825","4817","4809"].forEach(function(id,i){s+=uu(id,xIL,yU+i*(UH+G),UW,UH);});
+  ["4850","4842","4834a","4826","4818","4810","4802"].forEach(function(id,i){s+=uu(id,xIR,yU+i*(UH+G),UW,UH);});
+  ["4895","4887","4879","4871a","4863","4855","4847","4839"].forEach(function(id,i){s+=uu(id,xCC,yU+i*(UH+G),UW,UH);});
+  var g1=["th11572","th11566","th11565","th11548","th11542","th11536","th11530"];
+  var g2=["th11524","th11518","th11512","th11506","th11500","th11494"];
+  var g3=["th11498","th11492","th11486","th11480","th11474","th11468"];
+  var g4=["th11462","th11456","th11450","th11444","th11438","th11432","th11426"];
+  var bx=xCC;
+  g1.forEach(function(id,i){s+=uu(id,bx+i*(TW+G),yBTH,TW,TH,true);}); bx+=g1.length*(TW+G)+8;
+  g2.forEach(function(id,i){s+=uu(id,bx+i*(TW+G),yBTH,TW,TH,true);}); bx+=g2.length*(TW+G)+8;
+  g3.forEach(function(id,i){s+=uu(id,bx+i*(TW+G),yBTH,TW,TH,true);}); bx+=g3.length*(TW+G)+8;
+  g4.forEach(function(id,i){s+=uu(id,bx+i*(TW+G),yBTH,TW,TH,true);});
+  ["4878","4872b","4866","4860","4854"].forEach(function(id,i){s+=uu(id,xRL,yU+i*(UH+G),UW,UH);});
+  ["4877","4871b","4865","4859"].forEach(function(id,i){s+=uu(id,xRR,yU+i*(UH+G),UW,UH);});
+  var yRM=yU+lkH+G;
+  ["4840b","4834b","4828","4822","4814","4806"].forEach(function(id,i){s+=uu(id,xRL,yRM+i*(UH+G),UW,UH);});
+  ["4833b","4827","4821","4813","4805"].forEach(function(id,i){s+=uu(id,xRR,yRM+i*(UH+G),UW,UH);});
+  var ly=H-22;
   s+='<rect x="'+xL+'" y="'+ly+'" width="12" height="12" fill="#fff" stroke="#888" stroke-width="1" rx="2"/><text x="'+(xL+16)+'" y="'+(ly+10)+'" font-size="11" fill="#fff">Sin datos</text>';
   s+='<rect x="'+(xL+100)+'" y="'+ly+'" width="12" height="12" fill="#c8f0d4" stroke="#888" stroke-width="1" rx="2"/><text x="'+(xL+116)+'" y="'+(ly+10)+'" font-size="11" fill="#fff">Con datos</text>';
   s+='<rect x="'+(xL+210)+'" y="'+ly+'" width="12" height="12" fill="#90cdf4" stroke="#2b6cb0" stroke-width="2" rx="2"/><text x="'+(xL+226)+'" y="'+(ly+10)+'" font-size="11" fill="#fff">Seleccionado</text>';
-  s+='</svg>';
-  document.getElementById('map-container').innerHTML=s;
+  s+="</svg>";
+  document.getElementById("map-container").innerHTML=s;
 }
 function renderList(){
   document.getElementById('list-body').innerHTML=filteredProps(document.getElementById('sb-search').value).map(p=>`
     <tr onclick="selectProp('${p.id}');switchView('map')">
       <td><span class="badge badge-blue">${p.unit}</span></td>
-      <td>${p.homeowner1||'—'}</td><td>${p.homeowner2||'—'}</td>
-      <td>${p.tenant1_name||'—'}</td>
+      <td>${p.homeowner1||'â'}</td><td>${p.homeowner2||'â'}</td>
+      <td>${p.tenant1_name||'â'}</td>
       <td>${[1,2,3,4,5,6,7,8].filter(n=>p['kf'+n]).map(n=>`<span class="badge badge-green">${p['kf'+n]}</span>`).join(' ')}</td>
-      <td>${p.pet1_name?'🐾 '+p.pet1_name:''}</td>
+      <td>${p.pet1_name?'ð¾ '+p.pet1_name:''}</td>
     </tr>`).join('');
 }
 
@@ -355,12 +328,12 @@ function renderSearch(){
   el.innerHTML=filteredProps(q).map(p=>`
     <div class="card" onclick="selectProp('${p.id}');switchView('map')">
       <div style="display:flex;gap:6px;margin-bottom:5px;align-items:center">
-        <span class="badge badge-blue">${p.unit}</span>${hasData(p)?'<span class="badge badge-green">✓</span>':''}
+        <span class="badge badge-blue">${p.unit}</span>${hasData(p)?'<span class="badge badge-green">â</span>':''}
       </div>
       <div style="font-size:13px;font-weight:500">${p.homeowner1||'<span style="color:#a0aec0;font-size:12px">Sin datos</span>'}</div>
       ${p.tenant1_name?`<div style="font-size:12px;color:#718096">T: ${p.tenant1_name}</div>`:''}
-      ${p.kf1?`<div style="font-size:12px;color:#718096">🔑 ${p.kf1}</div>`:''}
-      ${p.pet1_name?`<div style="font-size:12px;color:#718096">🐾 ${p.pet1_name}</div>`:''}
+      ${p.kf1?`<div style="font-size:12px;color:#718096">ð ${p.kf1}</div>`:''}
+      ${p.pet1_name?`<div style="font-size:12px;color:#718096">ð¾ ${p.pet1_name}</div>`:''}
     </div>`).join('');
 }
 
@@ -368,9 +341,9 @@ function renderIE(){
   const t=Object.keys(DB).length,d=Object.values(DB).filter(hasData).length;
   const ro=currentRole==='viewer';
   document.getElementById('ie-content').innerHTML=ro?'<p style="color:#718096;padding:16px">Necesitas acceso admin.</p>':`
-    <div class="ie-card"><h3>📤 Exportar a CSV</h3><p>Descarga todos los datos en Excel/Numbers.</p><button class="btn btn-primary" onclick="exportCSV()">Descargar CSV</button></div>
-    <div class="ie-card"><h3>📥 Importar desde CSV</h3><p>Columnas requeridas: id, unit, homeowner1, homeowner2, tenant1_name, tenant1_phone, tenant1_email, tenant2_name, tenant2_phone, tenant2_email, occ1_name, occ1_phone, occ1_email, occ2_name, occ2_phone, occ2_email, kf1…kf8, pet1_name, pet1_breed, pet1_gender, pet2_name, pet2_breed, pet2_gender, notes</p><input type="file" accept=".csv" onchange="importCSV(event)"/></div>
-    <div class="ie-card"><h3>📊 Estadísticas</h3><div class="stat-grid">
+    <div class="ie-card"><h3>ð¤ Exportar a CSV</h3><p>Descarga todos los datos en Excel/Numbers.</p><button class="btn btn-primary" onclick="exportCSV()">Descargar CSV</button></div>
+    <div class="ie-card"><h3>ð¥ Importar desde CSV</h3><p>Columnas requeridas: id, unit, homeowner1, homeowner2, tenant1_name, tenant1_phone, tenant1_email, tenant2_name, tenant2_phone, tenant2_email, occ1_name, occ1_phone, occ1_email, occ2_name, occ2_phone, occ2_email, kf1â¦kf8, pet1_name, pet1_breed, pet1_gender, pet2_name, pet2_breed, pet2_gender, notes</p><input type="file" accept=".csv" onchange="importCSV(event)"/></div>
+    <div class="ie-card"><h3>ð EstadÃ­sticas</h3><div class="stat-grid">
       <div class="stat"><div class="stat-n">${t}</div><div class="stat-l">Total</div></div>
       <div class="stat"><div class="stat-n">${d}</div><div class="stat-l">Con datos</div></div>
       <div class="stat"><div class="stat-n">${t-d}</div><div class="stat-l">Sin datos</div></div>
@@ -397,28 +370,28 @@ function closeModal(){document.getElementById('overlay').classList.remove('open'
 function fld(label,key,p,type='text'){
   const val=(p[key]||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const disp=(p[key]||'');
-  if(type==='select')return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'—'}</div><select name="${key}"><option value="">—</option><option${disp==='Male'?' selected':''}>Male</option><option${disp==='Female'?' selected':''}>Female</option></select></div>`;
-  if(type==='textarea')return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'—'}</div><textarea name="${key}" rows="3">${disp}</textarea></div>`;
-  return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'—'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
+  if(type==='select')return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'â'}</div><select name="${key}"><option value="">â</option><option${disp==='Male'?' selected':''}>Male</option><option${disp==='Female'?' selected':''}>Female</option></select></div>`;
+  if(type==='textarea')return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'â'}</div><textarea name="${key}" rows="3">${disp}</textarea></div>`;
+  return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'â'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
 }
 function fldFull(label,key,p,type='text'){
   const val=(p[key]||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const disp=(p[key]||'');
-  return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'—'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
+  return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'â'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
 }
 
 function renderModalBody(p,editing){
   const ro=currentRole==='viewer';const cls=editing&&!ro?'editing':'';
   document.getElementById('modal-body').innerHTML=`<div class="${cls}" id="fw">
-  <div class="sec"><div class="sec-title">Propiedad</div><div class="sec-body cols1">${fld('Dirección','address',p)}</div></div>
+  <div class="sec"><div class="sec-title">Propiedad</div><div class="sec-body cols1">${fld('DirecciÃ³n','address',p)}</div></div>
   <div class="sec"><div class="sec-title">Homeowners</div><div class="sec-body">${fld('Homeowner 1','homeowner1',p)}${fld('Homeowner 2','homeowner2',p)}</div></div>
-  <div class="sec"><div class="sec-title">Tenant 1</div><div class="sec-body">${fld('Nombre','tenant1_name',p)}${fld('Teléfono','tenant1_phone',p)}${fldFull('Email','tenant1_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Tenant 2</div><div class="sec-body">${fld('Nombre','tenant2_name',p)}${fld('Teléfono','tenant2_phone',p)}${fldFull('Email','tenant2_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Occupant Adicional 1</div><div class="sec-body">${fld('Nombre','occ1_name',p)}${fld('Teléfono','occ1_phone',p)}${fldFull('Email','occ1_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Occupant Adicional 2</div><div class="sec-body">${fld('Nombre','occ2_name',p)}${fld('Teléfono','occ2_phone',p)}${fldFull('Email','occ2_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Tenant 1</div><div class="sec-body">${fld('Nombre','tenant1_name',p)}${fld('TelÃ©fono','tenant1_phone',p)}${fldFull('Email','tenant1_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Tenant 2</div><div class="sec-body">${fld('Nombre','tenant2_name',p)}${fld('TelÃ©fono','tenant2_phone',p)}${fldFull('Email','tenant2_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Occupant Adicional 1</div><div class="sec-body">${fld('Nombre','occ1_name',p)}${fld('TelÃ©fono','occ1_phone',p)}${fldFull('Email','occ1_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Occupant Adicional 2</div><div class="sec-body">${fld('Nombre','occ2_name',p)}${fld('TelÃ©fono','occ2_phone',p)}${fldFull('Email','occ2_email',p,'email')}</div></div>
   <div class="sec"><div class="sec-title">Keyfobs</div><div class="sec-body cols4">${[1,2,3,4,5,6,7,8].map(n=>fld('Keyfob '+n,'kf'+n,p)).join('')}</div></div>
-  <div class="sec"><div class="sec-title">Mascota 1</div><div class="sec-body">${fld('Nombre','pet1_name',p)}${fld('Raza','pet1_breed',p)}${fld('Género','pet1_gender',p,'select')}</div></div>
-  <div class="sec"><div class="sec-title">Mascota 2</div><div class="sec-body">${fld('Nombre','pet2_name',p)}${fld('Raza','pet2_breed',p)}${fld('Género','pet2_gender',p,'select')}</div></div>
+  <div class="sec"><div class="sec-title">Mascota 1</div><div class="sec-body">${fld('Nombre','pet1_name',p)}${fld('Raza','pet1_breed',p)}${fld('GÃ©nero','pet1_gender',p,'select')}</div></div>
+  <div class="sec"><div class="sec-title">Mascota 2</div><div class="sec-body">${fld('Nombre','pet2_name',p)}${fld('Raza','pet2_breed',p)}${fld('GÃ©nero','pet2_gender',p,'select')}</div></div>
   <div class="sec"><div class="sec-title">Notas</div><div class="sec-body cols1">${fld('Notas','notes',p,'textarea')}</div></div>
   </div>`;
 }
@@ -427,10 +400,10 @@ function renderModalFooter(p,editing){
   const ro=currentRole==='viewer';
   document.getElementById('modal-footer').innerHTML=
     ro?`<button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`:
-    editing?`<button class="btn btn-success" onclick="saveModal('${p.id}')">💾 Guardar</button>
+    editing?`<button class="btn btn-success" onclick="saveModal('${p.id}')">ð¾ Guardar</button>
               <button class="btn btn-secondary" onclick="openModal('${p.id}')">Cancelar</button>
               <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`:
-             `<button class="btn btn-primary" onclick="editModal('${p.id}')">✏️ Editar</button>
+             `<button class="btn btn-primary" onclick="editModal('${p.id}')">âï¸ Editar</button>
               <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`;
 }
 function editModal(id){const p=DB[id]||{};renderModalBody(p,true);renderModalFooter(p,true);}
@@ -438,7 +411,7 @@ async function saveModal(id){
   const p=DB[id]||{};const fw=document.getElementById('fw');const updated={...p};
   fw.querySelectorAll('input,select').forEach(el=>{if(el.name)updated[el.name]=el.value;});
   fw.querySelectorAll('textarea').forEach(el=>{if(el.name)updated[el.name]=el.value;});
-  document.getElementById('modal-footer').innerHTML='<span style="color:#718096;font-size:13px">💾 Guardando...</span>';
+  document.getElementById('modal-footer').innerHTML='<span style="color:#718096;font-size:13px">ð¾ Guardando...</span>';
   await saveProp(updated);openModal(id);
 }
 
@@ -446,7 +419,7 @@ function exportCSV(){
   const cols=['id','unit','address','homeowner1','homeowner2','tenant1_name','tenant1_phone','tenant1_email','tenant2_name','tenant2_phone','tenant2_email','occ1_name','occ1_phone','occ1_email','occ2_name','occ2_phone','occ2_email','kf1','kf2','kf3','kf4','kf5','kf6','kf7','kf8','pet1_name','pet1_breed','pet1_gender','pet2_name','pet2_breed','pet2_gender','notes'];
   const csv=[cols.join(','),...allProps().map(p=>cols.map(c=>`"${(p[c]||'').toString().replace(/"/g,'""')}"`).join(','))].join('\n');
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='dimensions_doral_hoa.csv';a.click();
-  showToast('📥 CSV exportado');
+  showToast('ð¥ CSV exportado');
 }
 async function importCSV(e){
   const file=e.target.files[0];if(!file)return;
@@ -462,9 +435,9 @@ async function importCSV(e){
         const obj={};headers.forEach((h,i)=>{obj[h]=(vals[i]||'').replace(/^"|"$/g,'');});return obj;
       }).filter(r=>r.id||r.unit);
       const{error}=await sb.from('properties').upsert(rows,{onConflict:'id'});
-      if(!error){await loadData();showToast('✅ Importado: '+rows.length+' registros');}
-      else showToast('❌ Error: '+error.message);
-    }catch(err){showToast('❌ Error: '+err.message);}
+      if(!error){await loadData();showToast('â Importado: '+rows.length+' registros');}
+      else showToast('â Error: '+error.message);
+    }catch(err){showToast('â Error: '+err.message);}
   };
   reader.readAsText(file,'UTF-8');e.target.value='';
 }
