@@ -40,7 +40,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a
 .prop-sub{font-size:11px;color:#718096;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .content{flex:1;overflow:hidden;display:flex;flex-direction:column}
 .view{flex:1;overflow:hidden;display:flex;flex-direction:column}
-.map-wrap{flex:1;overflow:auto;background:#5a9e5a;padding:10px;display:block}
+.map-wrap{flex:1;overflow:auto;background:#5a9e5a;padding:10px}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:14px;overflow-y:auto}
 .overlay.open{display:flex}
 .modal{background:#fff;border-radius:10px;width:100%;max-width:640px}
@@ -91,30 +91,30 @@ table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
 @media(max-width:600px){.sidebar{display:none}.topbar h1{font-size:13px}.nav-btn{font-size:11px;padding:4px 6px}.sec-body.cols4{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-<body style="background:#f0f4f8"><div id="preload" style="display:none;align-items:center;justify-content:center;height:100vh;font-family:system-ui;color:#1e3a5f;font-size:18px;font-weight:600">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ  Cargando Dimensions at Doral...</div>
+<body style="background:#f0f4f8"><div id="preload" style="display:none;align-items:center;justify-content:center;height:100vh;font-family:system-ui;color:#1e3a5f;font-size:18px;font-weight:600">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ  Cargando Dimensions at Doral...</div>
 <div id="login-page" style="display:flex;align-items:center;justify-content:center;height:100vh;background:#f0f4f8">
   <div class="login-box">
-    <h1>ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ  Dimensions at Doral</h1>
+    <h1>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ  Dimensions at Doral</h1>
     <p>HOA Property Management</p>
-    <div id="login-err" class="login-err">Usuario o contraseÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±a incorrectos</div>
+    <div id="login-err" class="login-err">Usuario o contraseÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±a incorrectos</div>
     <div class="lf"><label>Usuario</label><input id="lu" placeholder="admin o viewer" autocomplete="username"/></div>
-    <div class="lf"><label>ContraseÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±a</label><input id="lp" type="password" autocomplete="current-password"/></div>
+    <div class="lf"><label>ContraseÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±a</label><input id="lp" type="password" autocomplete="current-password"/></div>
     <button class="login-btn" onclick="doLogin()">Entrar</button>
-    <div style="margin-top:12px;font-size:11px;color:#a0aec0;text-align:center">Admin: admin / doral2024 &nbsp;ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ·&nbsp; Viewer: viewer / view2024</div>
+    <div style="margin-top:12px;font-size:11px;color:#a0aec0;text-align:center">Admin: admin / doral2024 &nbsp;ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ·&nbsp; Viewer: viewer / view2024</div>
   </div>
 </div>
 
 <div id="app" style="display:none;flex-direction:column;height:100vh;overflow:hidden">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:8px">
-      <span>ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ </span><h1>Dimensions at Doral HOA</h1>
+      <span>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ </span><h1>Dimensions at Doral HOA</h1>
       <span id="role-tag" class="role-tag">admin</span>
     </div>
     <div style="display:flex;gap:4px;flex-wrap:wrap">
-      <button class="nav-btn active" onclick="switchView('map')">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂº Mapa</button>
-      <button class="nav-btn" onclick="switchView('list')">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Lista</button>
-      <button class="nav-btn" onclick="switchView('search')">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Buscar</button>
-      <button class="nav-btn" onclick="switchView('ie')">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤ Import/Export</button>
+      <button class="nav-btn active" onclick="switchView('map')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂº Mapa</button>
+      <button class="nav-btn" onclick="switchView('list')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Lista</button>
+      <button class="nav-btn" onclick="switchView('search')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Buscar</button>
+      <button class="nav-btn" onclick="switchView('ie')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤ Import/Export</button>
       <button class="nav-btn" onclick="logout()" style="background:rgba(220,50,50,.3)">Salir</button>
     </div>
   </div>
@@ -134,7 +134,7 @@ table.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
 
 <div id="overlay" class="overlay" onclick="overlayClick(event)">
   <div class="modal" id="modal">
-    <div class="modal-hdr"><h2 id="modal-title">Unidad</h2><button class="modal-close" onclick="closeModal()">ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button></div>
+    <div class="modal-hdr"><h2 id="modal-title">Unidad</h2><button class="modal-close" onclick="closeModal()">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</button></div>
     <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer" id="modal-footer"></div>
   </div>
@@ -207,7 +207,7 @@ function logout(){sessionStorage.removeItem('hoa');document.getElementById('app'
 (function(){const s=sessionStorage.getItem('hoa');if(s){try{const u=JSON.parse(s);currentRole=u.role;document.getElementById('login-page').style.display='none';document.getElementById('app').style.display='flex';document.getElementById('role-tag').textContent=u.role;loadData();}catch(e){}}})();
 
 async function loadData(){
-  document.getElementById('map-container').innerHTML='<div class="loading">ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³ Cargando datos...</div>';
+  document.getElementById('map-container').innerHTML='<div class="loading">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³ Cargando datos...</div>';
   const{data}=await sb.from('properties').select('*');
   PROP_DEFS.forEach(d=>{DB[d.id]=empty(d.id,d.lbl);});
   if(data)data.forEach(r=>{if(DB[r.id])DB[r.id]={...DB[r.id],...r};else DB[r.id]=r;});
@@ -215,8 +215,8 @@ async function loadData(){
 }
 async function saveProp(p){
   const{error}=await sb.from('properties').upsert({...p,updated_at:new Date().toISOString()},{onConflict:'id'});
-  if(!error){DB[p.id]=p;renderAll();showToast('ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Guardado');}
-  else showToast('ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Error: '+error.message);
+  if(!error){DB[p.id]=p;renderAll();showToast('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Guardado');}
+  else showToast('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Error: '+error.message);
 }
 function allProps(){return Object.values(DB).sort((a,b)=>a.unit.localeCompare(b.unit,undefined,{numeric:true}));}
 function filteredProps(q){
@@ -291,7 +291,7 @@ function renderMap(){
       :'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="'+col+'" font-family="Arial">'+t+'</text>';
   }
 
-  var s='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" style="display:block;width:auto;height:auto;max-width:none">';
+  var s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" style="display:block;width:100%;height:auto">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#5a9e5a"/>';
 
   // Streets
@@ -325,7 +325,7 @@ function renderMap(){
     s+=box(id, xIL+i*(TW+G), yTH, TW, TH, true);
   });
 
-  // INNER BLOCK: 7 rows Ã 2 cols
+  // INNER BLOCK: 7 rows ÃÂ 2 cols
   ["4857","4849","4841","4833a","4825","4817","4809"].forEach(function(id,i){s+=box(id,xIL,yU+i*(UH+G),UW,UH);});
   ["4850","4842","4834a","4826","4818","4810","4802"].forEach(function(id,i){s+=box(id,xIR,yU+i*(UH+G),UW,UH);});
 
@@ -342,9 +342,9 @@ function renderMap(){
   ["4833b","4827","4821","4813","4805"].forEach(function(id,i){s+=box(id,xRR,yRB+i*(UH+G),UW,UH);});
 
   // BOTTOM TOWNHOUSES: 4 groups, each cell TW=34 TH=68
-  // Total: 7+6+6+7=26 cells Ã (34+3)=37px + 3gapsÃ8px = 962+24=986px
-  // Available from xCC to xS3 = 500+UW+G = 572px â NOT enough for 34px wide
-  // Use TW=18: 26Ã18+25Ã3+3Ã8=468+75+24=567 <= 572 YES
+  // Total: 7+6+6+7=26 cells ÃÂ (34+3)=37px + 3gapsÃÂ8px = 962+24=986px
+  // Available from xCC to xS3 = 500+UW+G = 572px Ã¢ÂÂ NOT enough for 34px wide
+  // Use TW=18: 26ÃÂ18+25ÃÂ3+3ÃÂ8=468+75+24=567 <= 572 YES
   var BTW=18, BTH=68, BG=3, BGRP=8;
   var g1=["th11572","th11566","th11565","th11548","th11542","th11536","th11530"];
   var g2=["th11524","th11518","th11512","th11506","th11500","th11494"];
@@ -367,16 +367,16 @@ function renderMap(){
   s+="</svg>";
   document.getElementById("map-container").innerHTML=s;
   // Also fix the map-wrap to allow horizontal scroll
-  var mw=document.querySelector(".map-wrap");mw.style.overflow="auto";mw.style.display="block";
+  
 }
 function renderList(){
   document.getElementById('list-body').innerHTML=filteredProps(document.getElementById('sb-search').value).map(p=>`
     <tr onclick="selectProp('${p.id}');switchView('map')">
       <td><span class="badge badge-blue">${p.unit}</span></td>
-      <td>${p.homeowner1||'ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</td><td>${p.homeowner2||'ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</td>
-      <td>${p.tenant1_name||'ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</td>
+      <td>${p.homeowner1||'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</td><td>${p.homeowner2||'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</td>
+      <td>${p.tenant1_name||'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</td>
       <td>${[1,2,3,4,5,6,7,8].filter(n=>p['kf'+n]).map(n=>`<span class="badge badge-green">${p['kf'+n]}</span>`).join(' ')}</td>
-      <td>${p.pet1_name?'ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ '+p.pet1_name:''}</td>
+      <td>${p.pet1_name?'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ '+p.pet1_name:''}</td>
     </tr>`).join('');
 }
 
@@ -386,12 +386,12 @@ function renderSearch(){
   el.innerHTML=filteredProps(q).map(p=>`
     <div class="card" onclick="selectProp('${p.id}');switchView('map')">
       <div style="display:flex;gap:6px;margin-bottom:5px;align-items:center">
-        <span class="badge badge-blue">${p.unit}</span>${hasData(p)?'<span class="badge badge-green">ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</span>':''}
+        <span class="badge badge-blue">${p.unit}</span>${hasData(p)?'<span class="badge badge-green">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</span>':''}
       </div>
       <div style="font-size:13px;font-weight:500">${p.homeowner1||'<span style="color:#a0aec0;font-size:12px">Sin datos</span>'}</div>
       ${p.tenant1_name?`<div style="font-size:12px;color:#718096">T: ${p.tenant1_name}</div>`:''}
-      ${p.kf1?`<div style="font-size:12px;color:#718096">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ${p.kf1}</div>`:''}
-      ${p.pet1_name?`<div style="font-size:12px;color:#718096">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ ${p.pet1_name}</div>`:''}
+      ${p.kf1?`<div style="font-size:12px;color:#718096">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ ${p.kf1}</div>`:''}
+      ${p.pet1_name?`<div style="font-size:12px;color:#718096">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ ${p.pet1_name}</div>`:''}
     </div>`).join('');
 }
 
@@ -399,9 +399,9 @@ function renderIE(){
   const t=Object.keys(DB).length,d=Object.values(DB).filter(hasData).length;
   const ro=currentRole==='viewer';
   document.getElementById('ie-content').innerHTML=ro?'<p style="color:#718096;padding:16px">Necesitas acceso admin.</p>':`
-    <div class="ie-card"><h3>ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤ Exportar a CSV</h3><p>Descarga todos los datos en Excel/Numbers.</p><button class="btn btn-primary" onclick="exportCSV()">Descargar CSV</button></div>
-    <div class="ie-card"><h3>ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¥ Importar desde CSV</h3><p>Columnas requeridas: id, unit, homeowner1, homeowner2, tenant1_name, tenant1_phone, tenant1_email, tenant2_name, tenant2_phone, tenant2_email, occ1_name, occ1_phone, occ1_email, occ2_name, occ2_phone, occ2_email, kf1ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦kf8, pet1_name, pet1_breed, pet1_gender, pet2_name, pet2_breed, pet2_gender, notes</p><input type="file" accept=".csv" onchange="importCSV(event)"/></div>
-    <div class="ie-card"><h3>ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ EstadÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­sticas</h3><div class="stat-grid">
+    <div class="ie-card"><h3>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¤ Exportar a CSV</h3><p>Descarga todos los datos en Excel/Numbers.</p><button class="btn btn-primary" onclick="exportCSV()">Descargar CSV</button></div>
+    <div class="ie-card"><h3>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¥ Importar desde CSV</h3><p>Columnas requeridas: id, unit, homeowner1, homeowner2, tenant1_name, tenant1_phone, tenant1_email, tenant2_name, tenant2_phone, tenant2_email, occ1_name, occ1_phone, occ1_email, occ2_name, occ2_phone, occ2_email, kf1ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦kf8, pet1_name, pet1_breed, pet1_gender, pet2_name, pet2_breed, pet2_gender, notes</p><input type="file" accept=".csv" onchange="importCSV(event)"/></div>
+    <div class="ie-card"><h3>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ EstadÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­sticas</h3><div class="stat-grid">
       <div class="stat"><div class="stat-n">${t}</div><div class="stat-l">Total</div></div>
       <div class="stat"><div class="stat-n">${d}</div><div class="stat-l">Con datos</div></div>
       <div class="stat"><div class="stat-n">${t-d}</div><div class="stat-l">Sin datos</div></div>
@@ -428,28 +428,28 @@ function closeModal(){document.getElementById('overlay').classList.remove('open'
 function fld(label,key,p,type='text'){
   const val=(p[key]||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const disp=(p[key]||'');
-  if(type==='select')return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</div><select name="${key}"><option value="">ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</option><option${disp==='Male'?' selected':''}>Male</option><option${disp==='Female'?' selected':''}>Female</option></select></div>`;
-  if(type==='textarea')return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</div><textarea name="${key}" rows="3">${disp}</textarea></div>`;
-  return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
+  if(type==='select')return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</div><select name="${key}"><option value="">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ</option><option${disp==='Male'?' selected':''}>Male</option><option${disp==='Female'?' selected':''}>Female</option></select></div>`;
+  if(type==='textarea')return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</div><textarea name="${key}" rows="3">${disp}</textarea></div>`;
+  return`<div class="field"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
 }
 function fldFull(label,key,p,type='text'){
   const val=(p[key]||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const disp=(p[key]||'');
-  return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
+  return`<div class="field" style="grid-column:1/-1"><label>${label}</label><div class="vv${!disp?' empty':''}">${disp||'ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ'}</div><input type="${type}" name="${key}" value="${val}"/></div>`;
 }
 
 function renderModalBody(p,editing){
   const ro=currentRole==='viewer';const cls=editing&&!ro?'editing':'';
   document.getElementById('modal-body').innerHTML=`<div class="${cls}" id="fw">
-  <div class="sec"><div class="sec-title">Propiedad</div><div class="sec-body cols1">${fld('DirecciÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n','address',p)}</div></div>
+  <div class="sec"><div class="sec-title">Propiedad</div><div class="sec-body cols1">${fld('DirecciÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n','address',p)}</div></div>
   <div class="sec"><div class="sec-title">Homeowners</div><div class="sec-body">${fld('Homeowner 1','homeowner1',p)}${fld('Homeowner 2','homeowner2',p)}</div></div>
-  <div class="sec"><div class="sec-title">Tenant 1</div><div class="sec-body">${fld('Nombre','tenant1_name',p)}${fld('TelÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©fono','tenant1_phone',p)}${fldFull('Email','tenant1_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Tenant 2</div><div class="sec-body">${fld('Nombre','tenant2_name',p)}${fld('TelÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©fono','tenant2_phone',p)}${fldFull('Email','tenant2_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Occupant Adicional 1</div><div class="sec-body">${fld('Nombre','occ1_name',p)}${fld('TelÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©fono','occ1_phone',p)}${fldFull('Email','occ1_email',p,'email')}</div></div>
-  <div class="sec"><div class="sec-title">Occupant Adicional 2</div><div class="sec-body">${fld('Nombre','occ2_name',p)}${fld('TelÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©fono','occ2_phone',p)}${fldFull('Email','occ2_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Tenant 1</div><div class="sec-body">${fld('Nombre','tenant1_name',p)}${fld('TelÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©fono','tenant1_phone',p)}${fldFull('Email','tenant1_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Tenant 2</div><div class="sec-body">${fld('Nombre','tenant2_name',p)}${fld('TelÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©fono','tenant2_phone',p)}${fldFull('Email','tenant2_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Occupant Adicional 1</div><div class="sec-body">${fld('Nombre','occ1_name',p)}${fld('TelÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©fono','occ1_phone',p)}${fldFull('Email','occ1_email',p,'email')}</div></div>
+  <div class="sec"><div class="sec-title">Occupant Adicional 2</div><div class="sec-body">${fld('Nombre','occ2_name',p)}${fld('TelÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©fono','occ2_phone',p)}${fldFull('Email','occ2_email',p,'email')}</div></div>
   <div class="sec"><div class="sec-title">Keyfobs</div><div class="sec-body cols4">${[1,2,3,4,5,6,7,8].map(n=>fld('Keyfob '+n,'kf'+n,p)).join('')}</div></div>
-  <div class="sec"><div class="sec-title">Mascota 1</div><div class="sec-body">${fld('Nombre','pet1_name',p)}${fld('Raza','pet1_breed',p)}${fld('GÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©nero','pet1_gender',p,'select')}</div></div>
-  <div class="sec"><div class="sec-title">Mascota 2</div><div class="sec-body">${fld('Nombre','pet2_name',p)}${fld('Raza','pet2_breed',p)}${fld('GÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©nero','pet2_gender',p,'select')}</div></div>
+  <div class="sec"><div class="sec-title">Mascota 1</div><div class="sec-body">${fld('Nombre','pet1_name',p)}${fld('Raza','pet1_breed',p)}${fld('GÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©nero','pet1_gender',p,'select')}</div></div>
+  <div class="sec"><div class="sec-title">Mascota 2</div><div class="sec-body">${fld('Nombre','pet2_name',p)}${fld('Raza','pet2_breed',p)}${fld('GÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©nero','pet2_gender',p,'select')}</div></div>
   <div class="sec"><div class="sec-title">Notas</div><div class="sec-body cols1">${fld('Notas','notes',p,'textarea')}</div></div>
   </div>`;
 }
@@ -458,10 +458,10 @@ function renderModalFooter(p,editing){
   const ro=currentRole==='viewer';
   document.getElementById('modal-footer').innerHTML=
     ro?`<button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`:
-    editing?`<button class="btn btn-success" onclick="saveModal('${p.id}')">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ Guardar</button>
+    editing?`<button class="btn btn-success" onclick="saveModal('${p.id}')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ Guardar</button>
               <button class="btn btn-secondary" onclick="openModal('${p.id}')">Cancelar</button>
               <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`:
-             `<button class="btn btn-primary" onclick="editModal('${p.id}')">ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯ÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂ Editar</button>
+             `<button class="btn btn-primary" onclick="editModal('${p.id}')">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Editar</button>
               <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>`;
 }
 function editModal(id){const p=DB[id]||{};renderModalBody(p,true);renderModalFooter(p,true);}
@@ -469,7 +469,7 @@ async function saveModal(id){
   const p=DB[id]||{};const fw=document.getElementById('fw');const updated={...p};
   fw.querySelectorAll('input,select').forEach(el=>{if(el.name)updated[el.name]=el.value;});
   fw.querySelectorAll('textarea').forEach(el=>{if(el.name)updated[el.name]=el.value;});
-  document.getElementById('modal-footer').innerHTML='<span style="color:#718096;font-size:13px">ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ Guardando...</span>';
+  document.getElementById('modal-footer').innerHTML='<span style="color:#718096;font-size:13px">ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¾ Guardando...</span>';
   await saveProp(updated);openModal(id);
 }
 
@@ -477,7 +477,7 @@ function exportCSV(){
   const cols=['id','unit','address','homeowner1','homeowner2','tenant1_name','tenant1_phone','tenant1_email','tenant2_name','tenant2_phone','tenant2_email','occ1_name','occ1_phone','occ1_email','occ2_name','occ2_phone','occ2_email','kf1','kf2','kf3','kf4','kf5','kf6','kf7','kf8','pet1_name','pet1_breed','pet1_gender','pet2_name','pet2_breed','pet2_gender','notes'];
   const csv=[cols.join(','),...allProps().map(p=>cols.map(c=>`"${(p[c]||'').toString().replace(/"/g,'""')}"`).join(','))].join('\n');
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='dimensions_doral_hoa.csv';a.click();
-  showToast('ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¥ CSV exportado');
+  showToast('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¥ CSV exportado');
 }
 async function importCSV(e){
   const file=e.target.files[0];if(!file)return;
@@ -493,9 +493,9 @@ async function importCSV(e){
         const obj={};headers.forEach((h,i)=>{obj[h]=(vals[i]||'').replace(/^"|"$/g,'');});return obj;
       }).filter(r=>r.id||r.unit);
       const{error}=await sb.from('properties').upsert(rows,{onConflict:'id'});
-      if(!error){await loadData();showToast('ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Importado: '+rows.length+' registros');}
-      else showToast('ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Error: '+error.message);
-    }catch(err){showToast('ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Error: '+err.message);}
+      if(!error){await loadData();showToast('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Importado: '+rows.length+' registros');}
+      else showToast('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Error: '+error.message);
+    }catch(err){showToast('ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Error: '+err.message);}
   };
   reader.readAsText(file,'UTF-8');e.target.value='';
 }
